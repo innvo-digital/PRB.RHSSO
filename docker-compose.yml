@@ -1,0 +1,7 @@
+version: '3.4'
+services:
+  keycloak:
+    image: ocpreg.azurecr.io/keycloak
+    build:
+      context: .
+      dockerfile: Dockerfile
