@@ -17,7 +17,7 @@ steps:
   displayName: 'Push Service'
   inputs:
     azureSubscription: 'AzurePRB_DEV'
-    azureContainerRegistry: keycloakbrq
+    azureContainerRegistry: '{"loginServer":"keycloakbrq.azurecr.io", "id" : "/subscriptions/19d24e10-1ddf-4f7e-9615-abd8dc3b88d3/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/keycloakbrq"}'
     action: 'Push services'
     additionalImageTags: '$(Build.BuildNumber)'
     includeLatestTag: true
