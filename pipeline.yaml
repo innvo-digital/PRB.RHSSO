@@ -16,8 +16,8 @@ steps:
 - task: DockerCompose@0
   displayName: 'Push Service'
   inputs:
-    azureSubscription: 'AzurePRB_PROD'
-    azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
+    azureSubscription: 'AzurePRB_DEV'
+    azureContainerRegistry: keycloakbrq
     action: 'Push services'
     additionalImageTags: '$(Build.BuildNumber)'
     includeLatestTag: true
