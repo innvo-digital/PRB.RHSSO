@@ -2,10 +2,9 @@
 <@layout.registrationLayout displayInfo=social.displayInfo displayWide=(realm.password && social.providers??); section>
     <#if section = "form">
         <form id="prb-form" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
-            <div class="prb-form-content" id="form_content">
+            <div class="prb-form-content">
                 <label id="username-label" for="username" class="${properties.kcLabelClass!}"><span>CPF</span>
                     <input tabindex="1" id="username" class="prb-input" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off" />
-                    <span class="has-error" id="error_cpf">Insira um CPF válido.</span>
                 </label>
 
                 <label id="password-label" for="password" class="${properties.kcLabelClass!}"><span>Senha</span>
@@ -15,7 +14,7 @@
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
                     <div class="${properties.kcFormOptionsWrapperClass!}">
                         <#if realm.resetPasswordAllowed>
-                            <span id="forgout"><a tabindex="5" href="${url.loginResetCredentialsUrl}">Esqueci minha senha</a></span>
+                            <span><a tabindex="5" href="${url.loginResetCredentialsUrl}">Esqueci minha senha</a></span>
                         </#if>
                     </div>
                 </div>
