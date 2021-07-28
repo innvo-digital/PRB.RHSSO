@@ -35,16 +35,18 @@
             <script src="${script}" type="text/javascript"></script>
         </#list>
     </#if>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="${properties.kcBodyClass!}">
+<div class="prb-login">
     <div class="prb-header">
         <img src="${url.resourcesPath}/img/Logo.png" width="32" height="32">
     </div>
 
-    <div class="prb-title">Agora,<br /> informe sua <span class="prb-highlight">SENHA</span></div>
-    
-    <div class="prb-text">Sua senha precisa ter entre 6 a 8 dígitos entre letras e números.</div>
+    <div class="prb-title">Acesse sua <span class="prb-highlight">conta</span></div>
     
     <#nested "form"> 
 
@@ -74,41 +76,12 @@
         </div>
 
     </div>-->
+    </div>
 </body>
-<script type="text/javascript">
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
-    const password_label = document.getElementById('password-label');
-    const login_btn = document.getElementById('prb-btn-login');
-
-    if(!!password_label){
-        password_label.style.display = 'none';
-
-        username.addEventListener('keyup',function() {
-            username.classList.remove('error');
-
-            if(username.value.length === 1){
-                password_label.style.display = 'flex';
-            }
-        })
-
-        username.addEventListener('blur',function() {
-            if(username.value.length === 0){
-                username.classList.add('error');
-            }
-        })
-
-
-        password.addEventListener('keyup',function() {
-            if(password.value.length >= 6){
-                login_btn.classList.remove('disabled');
-            }
-            else {
-                login_btn.classList.add('disabled');
-            }
-        })
-    }
-
-</script>
+    <#if properties.script?has_content>
+        <#list properties.script?split(' ') as script>
+            <script src="${url.resourcesPath}/${script}" type="text/javascript"></script>
+        </#list>
+    </#if>
 </html>
 </#macro>
