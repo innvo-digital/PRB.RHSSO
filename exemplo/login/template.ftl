@@ -46,7 +46,7 @@
         <img src="${url.resourcesPath}/img/Logo.png" width="32" height="32">
     </div>
 
-    <div class="prb-title">Acesse sua, <span class="prb-highlight">SENHA</span></div>
+    <div class="prb-title">Acesse sua <span class="prb-highlight">conta</span></div>
     
     <#nested "form"> 
 

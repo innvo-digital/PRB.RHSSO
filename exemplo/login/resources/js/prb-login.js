@@ -49,8 +49,6 @@ window.onload = function () {
   username.addEventListener('keyup', function () {
     let cpf = username.value.replace(/[^\d]+/g, '');
 
-    console.log('login.js', [cpf, password.value, isValidCPF(cpf)]);
-
     if (cpf.length <= 10) {
       password_label.style.display = 'none';
       error_cpf.style.display = 'none';
