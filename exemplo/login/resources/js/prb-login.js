@@ -35,6 +35,7 @@ function isValidCPF(cpf) {
 
 window.onload = function () {
   const username = document.getElementById('username');
+  const my_cpf = document.getElementById('cpf');
   const password = document.getElementById('password');
   const password_label = document.getElementById('password-label');
   const login_btn = document.getElementById('prb-btn-login');
@@ -46,8 +47,8 @@ window.onload = function () {
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
 
-  username.addEventListener('keyup', function () {
-    let cpf = username.value.replace(/[^\d]+/g, '');
+  my_cpf.addEventListener('keyup', function () {
+    let cpf = my_cpf.value.replace(/[^\d]+/g, '');
 
     if (cpf.length <= 10) {
       password_label.style.display = 'none';
@@ -57,12 +58,13 @@ window.onload = function () {
       forgout.style.display = 'none';
       error_cpf.style.display = 'flex';
       username.classList.add('error');
-    } else if (isValidCPF(username.value) && cpf.length == 11) {
+    } else if (isValidCPF(cpf) && cpf.length == 11) {
       password_label.style.display = 'flex';
       forgout.style.display = 'flex';
       username.classList.remove('error');
       error_cpf.style.display = 'none';
       password.focus();
+      username.value = cpf;
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -83,5 +85,5 @@ window.onload = function () {
 };
 
 $(document).ready(function () {
-  $('#username').mask('000.000.000-00');
+  $('#cpf').mask('000.000.000-00');
 });
