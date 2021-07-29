@@ -4,7 +4,8 @@
         <form id="prb-form" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
             <div class="prb-form-content" id="form_content">
                 <label id="username-label" for="username" class="${properties.kcLabelClass!}"><span>CPF</span>
-                    <input tabindex="1" id="username" class="prb-input" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off" />
+                    <input tabindex="1" id="username" name="username" value="${(login.username!'')}" type="hidden" autofocus autocomplete="off" />
+                    <input tabindex="1" id="cpf" class="prb-input" value="" type="text" autofocus autocomplete="off" />
                     <span class="has-error" id="error_cpf">Insira um CPF válido.</span>
                 </label>
 
@@ -22,7 +23,11 @@
             </div>
 
             <input tabindex="4" class="disabled" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
-        </form>            
+        </form>    
+        <form id="prb-form-forgout" onsubmit="login.disabled = true; return true;" action="/" method="post">
+            <input type="hidden" name="cpf" value="07006453658">
+        </form>   
+        <p id="log"></p>     
     <#elseif section = "info" >
         <#if realm.password && realm.registrationAllowed && !usernameEditDisabled??>
             <div id="kc-registration">
