@@ -1,0 +1,4 @@
+br\com\paranabanco\keycloak\authenticator\SMSAuthenticator.class
+br\com\paranabanco\keycloak\authenticator\SMSAuthenticatorFactory.class
+br\com\paranabanco\keycloak\authenticator\api\SMSParams.class
+br\com\paranabanco\keycloak\authenticator\api\SMSSendVerify.class
