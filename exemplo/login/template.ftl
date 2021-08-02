@@ -47,12 +47,8 @@
     </div>
 
     <div class="prb-title">Acesse sua <span class="prb-highlight">conta</span></div>
-    
-    <#nested "form"> 
-
-    <#-- <div class="${properties.kcFormCardClass!} <#if displayWide>${properties.kcFormCardAccountClass!}</#if>">
-        <div id="kc-content">
-            <div id="kc-content-wrapper">
+        
+               
                 <#if displayMessage && message?has_content>
                     <div class="alert alert-${message.type}">
                         <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
@@ -61,21 +57,19 @@
                         <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
                         <span class="kc-feedback-text">${kcSanitize(message.summary)?no_esc}</span>
                     </div>
-                </#if>  
+                </#if> 
 
-                <#nested "form">
-
-                  <#if displayInfo>
+                <#if displayInfo>
                     <div id="kc-info" class="${properties.kcSignUpClass!}">
                         <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
                             <#nested "info">
                         </div>
                     </div>
                 </#if>  
-            </div>
-        </div>
+            
 
-    </div>-->
+                <#nested "form">
+        
     </div>
 </body>
     <#if properties.script?has_content>
