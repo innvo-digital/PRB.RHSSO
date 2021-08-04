@@ -19,8 +19,11 @@ COPY --from=build /src .
 
 #para cada template colocar em uma pasta destino diferente
 COPY /exemplo/ /opt/eap/themes/exemplo/
+RUN true
 COPY /standalone.xml /opt/eap/standalone/configuration/
-
+RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
+RUN true
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
+RUN true
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar /opt/eap/standalone/deployments/
