@@ -1,12 +1,12 @@
 batch
 
-set DB_DRIVER_NAME=mssql
+set DB_DRIVER_NAME=sqlserver
 set DB_USERNAME=User_d_prbrhsso
 set DB_PASSWORD=9Pu78MklZaW14d
-set DB_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
+set DB_DRIVER=com.microsoft.sqlserver
 set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
-set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;"
-set DB_EAP_MODULE=com.mssql
+set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;database\=prbrhsso-sqldb;"
+set DB_EAP_MODULE=com.microsoft.sqlserver
 
 set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
 
@@ -22,10 +22,11 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   jndi-name=java:jboss/datasources/KeycloakDS, \
   enabled=true, \
   use-java-context=true, \
+  use-ccm=true, \
   connection-url=$DB_JDBC_URL, \
-  driver-name=$DB_DRIVER_NAME, \
   user-name=$DB_USERNAME, \
-  password=$DB_PASSWORD \
+  password=$DB_PASSWORD, \
+  driver-name=$DB_DRIVER_NAME \
 )
 
 run-batch 
