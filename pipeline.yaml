@@ -18,7 +18,6 @@ jobs:
       action: 'Build services'
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
-      dockerComposeCommand: '--no-cache'
   
   - task: DockerCompose@0
     displayName: 'Push Service'
