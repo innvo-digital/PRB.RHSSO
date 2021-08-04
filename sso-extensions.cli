@@ -6,7 +6,7 @@ set DB_PASSWORD=9Pu78MklZaW14d
 set DB_DRIVER=com.microsoft.sqlserver
 set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
 set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;database\=prbrhsso-sqldb;"
-set DB_EAP_MODULE=com.microsoft.sqlserver
+set DB_EAP_MODULE=com.mssql
 
 set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
 
