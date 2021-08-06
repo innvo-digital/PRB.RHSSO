@@ -28,14 +28,11 @@ jobs:
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
   
-  - task: ms-devlabs.utilitytasks.task-Shellpp.Shellpp@0
-    displayName: 'Shell Script'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
     inputs:
-      type: InlineScript
-      script: |
-       oc login $(OCP_API) -u $(OCP_USER) -p $(OCP_PASSWORD) $(OCP_LOGIN_OPT)
-       oc project $(NAMESPACE)
-       oc apply -f deploy.yaml
+      PathtoPublish: deploy.yaml
+
   condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/dev'))
 
 - job: 'Homolog'
@@ -68,14 +65,11 @@ jobs:
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
   
-  - task: ms-devlabs.utilitytasks.task-Shellpp.Shellpp@0
-    displayName: 'Shell Script'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
     inputs:
-      type: InlineScript
-      script: |
-       oc login $(OCP_API) -u $(OCP_USER) -p $(OCP_PASSWORD) $(OCP_LOGIN_OPT)
-       oc project $(NAMESPACE)
-       oc apply -f deploy.yaml
+      PathtoPublish: deploy.yaml
+
   condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/homolog'))
 
 - job: 'Production'
@@ -108,12 +102,9 @@ jobs:
       additionalImageTags: '$(Build.BuildNumber)'
       includeLatestTag: true
   
-  - task: ms-devlabs.utilitytasks.task-Shellpp.Shellpp@0
-    displayName: 'Shell Script'
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
     inputs:
-      type: InlineScript
-      script: |
-       oc login $(OCP_API) -u $(OCP_USER) -p $(OCP_PASSWORD) $(OCP_LOGIN_OPT)
-       oc project $(NAMESPACE)
-       oc apply -f deploy.yaml
+      PathtoPublish: deploy.yaml
+
   condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master'))
