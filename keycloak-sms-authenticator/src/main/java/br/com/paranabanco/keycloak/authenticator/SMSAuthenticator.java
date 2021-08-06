@@ -14,19 +14,18 @@ import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.utils.FormMessage;
 import br.com.paranabanco.keycloak.authenticator.api.SMSSendVerify;
+import br.com.paranabanco.keycloak.authenticator.api.SMSlogger;
 
 public class SMSAuthenticator implements Authenticator {
 
-	private static final Logger logger = Logger.getLogger(SMSAuthenticator.class.getPackage().getName());
-
+	private static final SMSlogger logger = new SMSlogger();
+	public AuthenticatorConfigModel config;
 	public void authenticate(AuthenticationFlowContext context) {
-		logger.debug("Method [authenticate]");
-
-		AuthenticatorConfigModel config = context.getAuthenticatorConfig();
+		logger.Log("Method [authenticate]",config);
+	    config = context.getAuthenticatorConfig();
 		UserModel user = context.getUser();
 		String celular = getAttribute(user,"celular");
 		String cpf = getAttribute(user,"cpf");
-		
 		String url =  getConfigString(config,"URL_HOMOLAGACAO_PRBHASH"); 
 		String strUsarUrlHash = getConfigString(config,"USAR_URL_HOMOLAGACAO_PRBHASH"); 
 		String usarUrlHash = getConfigString(config,"USAR_URL_HOMOLAGACAO_PRBHASH"); 
@@ -38,14 +37,12 @@ public class SMSAuthenticator implements Authenticator {
 			url = getConfigString(config,"URL_PRODUCAO_PRBHASH");
 		}
 		
-
-		logger.debugv("celular {0} cpf {1}   {2}", celular,cpf,url);
+		logger.Log( String.format("celular {0} cpf {1} {2}", celular,cpf,url),config);
 
 		if (celular.isBlank() == false && cpf.isBlank() == false ) {
 
-			// SendSMS
 			SMSSendVerify sendVerify = new SMSSendVerify();
-			sendVerify.sendSMS(celular,cpf,user,url,b2);
+			sendVerify.sendSMS(celular,cpf,user,url,b2,config);
 			Response challenge = context.form().createForm("sms-validation.ftl");
 			context.challenge(challenge);
 			
@@ -58,18 +55,16 @@ public class SMSAuthenticator implements Authenticator {
 	}
 
 	public void action(AuthenticationFlowContext context) {
-		logger.debug("Method [action]");
-
+		logger.Log("Method [action]",config);
 		MultivaluedMap<String, String> inputData = context.getHttpRequest().getDecodedFormParameters();
 		String enteredCode = inputData.getFirst("smsCode");
 		UserModel user = context.getUser();
 		String celular = getAttribute(user,"celular");
 		String ultimoToken = getAttribute(user,"ultimo_token");
 		String cpf = getAttribute(user,"cpf");
-		logger.debugv("celular {0} cpf {1}", celular,cpf);
-
+		logger.Log( String.format("celular {0} cpf {1}", celular,cpf),config);
 		if(enteredCode.equals(ultimoToken)){
-			logger.info("verify code check : OK");
+			logger.Log("verify code check : OK");
 			context.success();
 		}
 		else {
@@ -78,16 +73,15 @@ public class SMSAuthenticator implements Authenticator {
 					.addError(new FormMessage("invalidSMSCodeMessage")).createForm("sms-validation-error.ftl");
 			context.challenge(challenge);
 		}
-
 	}
 
 	public boolean requiresUser() {
-		logger.debug("Method [requiresUser]");
+		logger.Log("Method [requiresUser]",config);
 		return false;
 	}
 
 	public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
-		logger.debug("Method [configuredFor]");
+		logger.Log("Method [configuredFor]",config);
 		return false;
 	}
 
@@ -96,7 +90,7 @@ public class SMSAuthenticator implements Authenticator {
 	}
 
 	public void close() {
-		logger.debug("<<<<<<<<<<<<<<< SMSAuthenticator close");
+		logger.Log("<<<<<<<<<<<<<<< SMSAuthenticator close",config);
 	}
 
 	private String getAttribute(UserModel user, String attributeName) {
@@ -110,7 +104,6 @@ public class SMSAuthenticator implements Authenticator {
 	private String getConfigString(AuthenticatorConfigModel config, String configName) {
 		String value = null;
 		if (config.getConfig() != null) {
-			// Get value
 			value = config.getConfig().get(configName);
 		}
 		return value;

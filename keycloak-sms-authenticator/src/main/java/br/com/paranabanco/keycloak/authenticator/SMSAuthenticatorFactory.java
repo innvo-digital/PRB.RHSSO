@@ -13,12 +13,12 @@ import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.provider.ProviderConfigurationBuilder;
-
+import br.com.paranabanco.keycloak.authenticator.api.SMSlogger;
 public class SMSAuthenticatorFactory implements AuthenticatorFactory, ConfigurableAuthenticatorFactory {
 
 	public static final String PROVIDER_ID = "sms-authenticator";
 	private static final SMSAuthenticator SINGLETON = new SMSAuthenticator();
-	private static final Logger logger = Logger.getLogger(SMSAuthenticatorFactory.class.getPackage().getName());
+	private  SMSlogger logger = new SMSlogger();
 
 	private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
 			AuthenticationExecutionModel.Requirement.REQUIRED,
@@ -50,6 +50,13 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 				.defaultValue(true)
                 .add()
 
+				.property()
+				.name("HABILITAR_LOG_CONSOLE_POD")
+                .label("HABILITAR_LOG_CONSOLE_POD")
+                .type(ProviderConfigProperty.BOOLEAN_TYPE)
+				.defaultValue(true)
+                .add()
+
                 .property()
 				.name("USAR_URL_HOMOLAGACAO_PRBHASH")
                 .label("USAR_URL_HOMOLAGACAO_PRBHASH")
@@ -68,11 +75,11 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public void init(Scope scope) {
-		logger.debug("Method [init]");
+		logger.Log("Method [init]");
 	}
 
 	public void postInit(KeycloakSessionFactory factory) {
-		logger.debug("Method [postInit]");
+		logger.Log("Method [postInit]");
 	}
 
 	public List<ProviderConfigProperty> getConfigProperties() {
@@ -88,7 +95,7 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public String getReferenceCategory() {
-		logger.debug("Method [getReferenceCategory]");
+		logger.Log("Method [getReferenceCategory]");
         return "sms-auth-code";
 	}
 
@@ -105,6 +112,6 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public void close() {
-		logger.debug("<<<<<<<<<<<<<<< SMSAuthenticatorFactory close");
+		logger.Log("<<<<<<<<<<<<<<< SMSAuthenticatorFactory close");
 	}
 }
