@@ -18,10 +18,9 @@ import br.com.paranabanco.keycloak.authenticator.api.SMSlogger;
 
 public class SMSAuthenticator implements Authenticator {
 
-	private static final SMSlogger logger = new SMSlogger();
 	public AuthenticatorConfigModel config;
 	public void authenticate(AuthenticationFlowContext context) {
-		logger.Log("Method [authenticate]",config);
+		SMSlogger.Log("Method [authenticate]",config);
 	    config = context.getAuthenticatorConfig();
 		UserModel user = context.getUser();
 		String celular = getAttribute(user,"celular");
@@ -37,7 +36,7 @@ public class SMSAuthenticator implements Authenticator {
 			url = getConfigString(config,"URL_PRODUCAO_PRBHASH");
 		}
 		
-		logger.Log( String.format("celular {0} cpf {1} {2}", celular,cpf,url),config);
+		SMSlogger.Log( String.format("celular {0} cpf {1} {2}", celular,cpf,url),config);
 
 		if (celular.isBlank() == false && cpf.isBlank() == false ) {
 
@@ -55,16 +54,16 @@ public class SMSAuthenticator implements Authenticator {
 	}
 
 	public void action(AuthenticationFlowContext context) {
-		logger.Log("Method [action]",config);
+		SMSlogger.Log("Method [action]",config);
 		MultivaluedMap<String, String> inputData = context.getHttpRequest().getDecodedFormParameters();
 		String enteredCode = inputData.getFirst("smsCode");
 		UserModel user = context.getUser();
 		String celular = getAttribute(user,"celular");
 		String ultimoToken = getAttribute(user,"ultimo_token");
 		String cpf = getAttribute(user,"cpf");
-		logger.Log( String.format("celular {0} cpf {1}", celular,cpf),config);
+		SMSlogger.Log( String.format("celular {0} cpf {1}", celular,cpf),config);
 		if(enteredCode.equals(ultimoToken)){
-			logger.Log("verify code check : OK");
+			SMSlogger.Log("verify code check : OK");
 			context.success();
 		}
 		else {
@@ -76,12 +75,12 @@ public class SMSAuthenticator implements Authenticator {
 	}
 
 	public boolean requiresUser() {
-		logger.Log("Method [requiresUser]",config);
+		SMSlogger.Log("Method [requiresUser]",config);
 		return false;
 	}
 
 	public boolean configuredFor(KeycloakSession session, RealmModel realm, UserModel user) {
-		logger.Log("Method [configuredFor]",config);
+		SMSlogger.Log("Method [configuredFor]",config);
 		return false;
 	}
 
@@ -90,7 +89,7 @@ public class SMSAuthenticator implements Authenticator {
 	}
 
 	public void close() {
-		logger.Log("<<<<<<<<<<<<<<< SMSAuthenticator close",config);
+		SMSlogger.Log("<<<<<<<<<<<<<<< SMSAuthenticator close",config);
 	}
 
 	private String getAttribute(UserModel user, String attributeName) {

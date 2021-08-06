@@ -17,7 +17,6 @@ import br.com.paranabanco.keycloak.authenticator.api.SMSlogger;
 import org.keycloak.models.AuthenticatorConfigModel;
 public class SMSSendVerify {
 
-	private static final SMSlogger logger = new SMSlogger();
 	public SMSSendVerify() {
 	}
 	public void sendSMS(String celular, String cpf, UserModel user,String url, Boolean validarPessoaTelefone,AuthenticatorConfigModel config) {
@@ -41,8 +40,8 @@ public class SMSSendVerify {
 		if (data == null) {
 			return;
 		}
-		logger.Log(String.format("Method [request] {0}",_url),config );
-		logger.Log(String.format("Method [request] {0}",data.toJSON()),config);
+		SMSlogger.Log(String.format("Method [request] {0}",_url),config );
+		SMSlogger.Log(String.format("Method [request] {0}",data.toJSON()),config);
 		HttpURLConnection conn;
 		InputStream in = null;
 		BufferedReader reader = null;
@@ -62,19 +61,19 @@ public class SMSSendVerify {
 				output.flush();
 				output.close();
 			} catch (IOException e) {
-				logger.Log(e.getMessage(),config);
+				SMSlogger.Log(e.getMessage(),config);
 			} finally {
 				if (output != null) {
 					try {
 						output.close();
 					} catch (IOException e) {
-						logger.Log(e.getMessage(),config);
+						SMSlogger.Log(e.getMessage(),config);
 					}
 				}
 			}
 			
 			final int resStatus = conn.getResponseCode();
-			logger.Log(String.format("RESPONSE STATUS : {0}", resStatus),config);
+			SMSlogger.Log(String.format("RESPONSE STATUS : {0}", resStatus),config);
 
 			if (resStatus == HttpURLConnection.HTTP_OK) {
 				in = conn.getInputStream();
@@ -82,25 +81,25 @@ public class SMSSendVerify {
 
 				String line;
 				while ((line = reader.readLine()) != null) {
-					logger.Log(String.format("RESPONSE DETAIL : {0}", line),config);
+					SMSlogger.Log(String.format("RESPONSE DETAIL : {0}", line),config);
 				}
 			}
 
 		} catch (IOException e) {
-			logger.Log(e.getMessage(),config);
+			SMSlogger.Log(e.getMessage(),config);
 		} finally {
 			if (in != null) {
 				try {
 					in.close();
 				} catch (IOException e) {
-					logger.Log(e.getMessage(),config);
+					SMSlogger.Log(e.getMessage(),config);
 				}
 			}
 			if (reader != null) {
 				try {
 					reader.close();
 				} catch (IOException e) {
-					logger.Log(e.getMessage(),config);
+					SMSlogger.Log(e.getMessage(),config);
 				}
 			}
 		}

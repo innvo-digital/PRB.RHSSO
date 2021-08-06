@@ -8,19 +8,16 @@ import org.jboss.logging.Logger;
 
 public class SMSlogger {
 
-    private  Logger logger = Logger.getLogger(SMSAuthenticator.class.getPackage().getName());
-
-	public SMSlogger() {
-        logger = Logger.getLogger(SMSAuthenticator.class.getPackage().getName());
-	}
-    public void Log(String conteudo ){
+    private static final Logger logger = Logger.getLogger(SMSlogger.class.getPackage().getName());
+    public static void Log(String conteudo ){
         logger.infov(conteudo);
     }
-    public void Log(String conteudo,AuthenticatorConfigModel config ){
-        String value = null;
-		if (config.getConfig() != null) {
-			value = config.getConfig().get("HABILITAR_LOG_CONSOLE_POD");
-            logger.infov(conteudo);
+    public static void Log(String conteudo,AuthenticatorConfigModel config ){
+		if (config != null && config.getConfig() != null) {
+            Boolean value  = Boolean.valueOf( config.getConfig().get("HABILITAR_LOG_CONSOLE_POD"));
+            if(value){
+                logger.infov(conteudo);
+            }
 		}
     }
 }

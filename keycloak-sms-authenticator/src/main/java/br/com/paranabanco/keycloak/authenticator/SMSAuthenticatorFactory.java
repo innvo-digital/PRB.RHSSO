@@ -18,7 +18,6 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 
 	public static final String PROVIDER_ID = "sms-authenticator";
 	private static final SMSAuthenticator SINGLETON = new SMSAuthenticator();
-	private  SMSlogger logger = new SMSlogger();
 
 	private static final AuthenticationExecutionModel.Requirement[] REQUIREMENT_CHOICES = {
 			AuthenticationExecutionModel.Requirement.REQUIRED,
@@ -75,11 +74,11 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public void init(Scope scope) {
-		logger.Log("Method [init]");
+		SMSlogger.Log("Method [init]");
 	}
 
 	public void postInit(KeycloakSessionFactory factory) {
-		logger.Log("Method [postInit]");
+		SMSlogger.Log("Method [postInit]");
 	}
 
 	public List<ProviderConfigProperty> getConfigProperties() {
@@ -95,7 +94,7 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public String getReferenceCategory() {
-		logger.Log("Method [getReferenceCategory]");
+		SMSlogger.Log("Method [getReferenceCategory]");
         return "sms-auth-code";
 	}
 
@@ -112,6 +111,6 @@ public class SMSAuthenticatorFactory implements AuthenticatorFactory, Configurab
 	}
 
 	public void close() {
-		logger.Log("<<<<<<<<<<<<<<< SMSAuthenticatorFactory close");
+		SMSlogger.Log("<<<<<<<<<<<<<<< SMSAuthenticatorFactory close");
 	}
 }
