@@ -64,7 +64,7 @@ public class SMSAuthenticator implements Authenticator {
 		String enteredCode = inputData.getFirst("smsCode");
 		UserModel user = context.getUser();
 		String celular = getAttribute(user,"celular");
-		String ultimoToken = getAttribute(user,"ultimoToken");
+		String ultimoToken = getAttribute(user,"ultimo_token");
 		String cpf = getAttribute(user,"cpf");
 		logger.debugv("celular {0} cpf {1}", celular,cpf);
 
