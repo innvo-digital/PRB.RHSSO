@@ -42,6 +42,7 @@ window.onload = function () {
   const forgout = document.getElementById('forgout');
   const error_cpf = document.getElementById('error_cpf');
   const form_content = document.getElementById('form_content');
+  const form_forgout = document.getElementById('prb-form-forgout');
 
   forgout.style.display = 'none';
   error_cpf.style.display = 'none';
@@ -53,11 +54,15 @@ window.onload = function () {
     if (cpf.length <= 10) {
       password_label.style.display = 'none';
       error_cpf.style.display = 'none';
+      login_btn.classList.add('disabled');
+      forgout.style.display = 'none';
+      password.value = '';
     } else if (isValidCPF(cpf) === false && cpf.length == 11) {
       password_label.style.display = 'none';
-      forgout.style.display = 'none';
       error_cpf.style.display = 'flex';
       username.classList.add('error');
+      login_btn.classList.add('disabled');
+      password.value = '';
     } else if (isValidCPF(cpf) && cpf.length == 11) {
       password_label.style.display = 'flex';
       forgout.style.display = 'flex';
@@ -65,6 +70,7 @@ window.onload = function () {
       error_cpf.style.display = 'none';
       password.focus();
       username.value = cpf;
+      document.cookie = 'cpf=' + cpf;
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -73,6 +79,12 @@ window.onload = function () {
 
   password.addEventListener('focus', function (e) {
     form_content.classList.add('mt-15');
+  });
+
+  forgout.addEventListener('click', function (e) {
+    e.preventDefault();
+    form_forgout.submit();
+    return false;
   });
 
   password.addEventListener('keyup', function () {
