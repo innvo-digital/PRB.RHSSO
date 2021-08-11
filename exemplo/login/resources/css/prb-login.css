@@ -35,7 +35,8 @@ body {
 
 .prb-header {
     display: block;
-    margin-bottom: 32px;
+    padding-bottom: 32px;
+    padding-top: 40px;
 }
 
 .prb-header img{
@@ -199,7 +200,6 @@ form#prb-form .has-error{
     width: 100%;
     height: 30px;
     left: 0px;
-    top: 5px;
     border-radius: 4px;
     flex: none;
     order: 1;
@@ -212,7 +212,7 @@ form#prb-form .has-error{
     font-size: 14px;
     line-height: 150%;
     letter-spacing: 0.4px;
-    top: 177px;
+    top: 220px;
     left: -50px;
     position: absolute;
 }
