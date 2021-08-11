@@ -34,6 +34,10 @@ function isValidCPF(cpf) {
 }
 
 window.onload = function () {
+  const hostname = window.location.href;
+  const realms = hostname.split('realms')[1].split('/')[1];
+  const uri = hostname.split('auth')[0] +'auth/realms/'+realms
+  const client_id = 'myclient';
   const username = document.getElementById('username');
   const my_cpf = document.getElementById('cpf');
   const password = document.getElementById('password');
@@ -42,8 +46,8 @@ window.onload = function () {
   const forgout = document.getElementById('forgout');
   const error_cpf = document.getElementById('error_cpf');
   const form_content = document.getElementById('form_content');
-  const form_forgout = document.getElementById('prb-form-forgout');
-
+  const prb_form = document.getElementById('prb-form');
+  
   forgout.style.display = 'none';
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
@@ -70,7 +74,6 @@ window.onload = function () {
       error_cpf.style.display = 'none';
       password.focus();
       username.value = cpf;
-      document.cookie = 'cpf=' + cpf;
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -83,8 +86,8 @@ window.onload = function () {
 
   forgout.addEventListener('click', function (e) {
     e.preventDefault();
-    form_forgout.submit();
-    return false;
+    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOUT=true");
+    return false
   });
 
   password.addEventListener('keyup', function () {
@@ -94,7 +97,41 @@ window.onload = function () {
       login_btn.classList.add('disabled');
     }
   });
+
+  prb_form.addEventListener('submit',function (e) {
+    e.preventDefault(); 
+    let submitForm = getUserToken(cpf.value.replace(/[^\d]+/g, ''), password.value, client_id, uri);
+    if(!submitForm) prb_form.submit();
+  });
+
 };
+
+function getUserToken(u,p,c,h) {
+  var data = {
+    client_id: c,
+    username: u,
+    password: p,
+    grant_type: 'password',
+  };
+
+  var options = {
+    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    method: 'POST',
+    body: new URLSearchParams(data)
+  };
+
+  fetch(h+'/protocol/openid-connect/token', options)
+  .then(res => res.json())
+  .then(response => {
+    if(response.access_token){ 
+      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token) 
+      window.location.href = h + '/account/'
+    }
+  }
+  ) 
+  .catch(error => console.error('Error: ', error));
+  return false;
+}
 
 $(document).ready(function () {
   $('#cpf').mask('000.000.000-00');
