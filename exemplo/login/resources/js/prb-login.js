@@ -74,6 +74,7 @@ window.onload = function () {
       error_cpf.style.display = 'none';
       password.focus();
       username.value = cpf;
+      document.cookie = "KEYCLOAK_USERNAME="+cpf; 
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -86,12 +87,27 @@ window.onload = function () {
 
   forgout.addEventListener('click', function (e) {
     e.preventDefault();
-    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOUT=true");
+    document.cookie = "KEYCLOAK_FORGOT=true"; 
     return false
   });
 
   password.addEventListener('keyup', function () {
-    if (password.value.length >= 6) {
+    let pass = password.value.replace(/[^\d]+/g, '');
+    password.value = '';
+    password.value = pass;
+    if (pass.length >= 6) {
+      login_btn.classList.remove('disabled');
+    } else {
+      login_btn.classList.add('disabled');
+    }
+  });
+
+  password.addEventListener('paste', function (event) {
+    event.preventDefault();
+    let paste = (event.clipboardData || window.clipboardData).getData('text').replace(/[^\d]+/g, '');
+    password.value = '';
+    password.value = paste;
+    if (paste.length >= 6) {
       login_btn.classList.remove('disabled');
     } else {
       login_btn.classList.add('disabled');
@@ -115,8 +131,14 @@ function getUserToken(u,p,c,h) {
   };
 
   var options = {
-    headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Credentials': true,
+    },
     method: 'POST',
+    mode: 'cors',
     body: new URLSearchParams(data)
   };
 
@@ -124,7 +146,8 @@ function getUserToken(u,p,c,h) {
   .then(res => res.json())
   .then(response => {
     if(response.access_token){ 
-      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token) 
+      // window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token)
+      document.cookie = "KEYCLOAK_ACCESS_TOKEN="+response.access_token;
       window.location.href = h + '/account/'
     }
   }

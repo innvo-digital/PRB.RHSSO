@@ -12,12 +12,9 @@ html {
 body {
     display: flex;
     background-color: var(--primary-base);
-    padding: 15px;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0 !important;
 
 }
 .prb-login{
@@ -26,8 +23,8 @@ body {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 95%;
-    margin: 0 auto;
+    height: 100%;
+    margin: 16px;
     position: relative;
     overflow: hidden;
 }
@@ -36,7 +33,6 @@ body {
 .prb-header {
     display: block;
     padding-bottom: 32px;
-    padding-top: 40px;
 }
 
 .prb-header img{
@@ -143,7 +139,7 @@ form#prb-form #prb-btn-login {
     font-size: 17px;
     line-height: 150%;
     width: 100%;
-    margin: auto 0;
+    margin: auto auto 16px;
     position: absolute;
     bottom: 15px;
 }
@@ -212,7 +208,7 @@ form#prb-form .has-error{
     font-size: 14px;
     line-height: 150%;
     letter-spacing: 0.4px;
-    top: 220px;
+    top: 190px;
     left: -50px;
     position: absolute;
 }
@@ -225,3 +221,11 @@ form#prb-form .has-error{
     top: 30px;
     display: none;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    select,
+    textarea,
+    input {
+      font-size: 16px;
+    }
+  }
