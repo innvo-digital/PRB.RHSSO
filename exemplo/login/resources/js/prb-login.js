@@ -75,6 +75,7 @@ window.onload = function () {
       password.focus();
       username.value = cpf;
       document.cookie = "KEYCLOAK_USERNAME="+cpf; 
+      window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME")+cpf;
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -88,6 +89,7 @@ window.onload = function () {
   forgout.addEventListener('click', function (e) {
     e.preventDefault();
     document.cookie = "KEYCLOAK_FORGOT=true"; 
+    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true");
     return false
   });
 
@@ -146,7 +148,7 @@ function getUserToken(u,p,c,h) {
   .then(res => res.json())
   .then(response => {
     if(response.access_token){ 
-      // window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token)
+      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token);
       document.cookie = "KEYCLOAK_ACCESS_TOKEN="+response.access_token;
       window.location.href = h + '/account/'
     }
