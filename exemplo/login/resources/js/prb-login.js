@@ -33,8 +33,12 @@ function isValidCPF(cpf) {
   return true;
 }
 
+
+
 window.onload = function () {
   const hostname = window.location.href;
+  const uaDataIsMobile = navigator.userAgentData?.mobile
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const realms = hostname.split('realms')[1].split('/')[1];
   const uri = hostname.split('auth')[0] +'auth/realms/'+realms
   const client_id = 'myclient';
@@ -54,7 +58,10 @@ window.onload = function () {
 
   function getToken(t){
     document.cookie = "KEYCLOAK_ACCESS_TOKEN="+t;
-    window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
+    
+    if(isMobile){
+      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
+    }
   }
 
   my_cpf.addEventListener('keyup', function () {
@@ -80,7 +87,10 @@ window.onload = function () {
       password.focus();
       username.value = cpf;
       document.cookie = "KEYCLOAK_USERNAME="+cpf; 
-      window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf)
+      if(isMobile){
+        window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf);
+      }
+      
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -94,7 +104,9 @@ window.onload = function () {
   forgout.addEventListener('click', function (e) {
     e.preventDefault();
     document.cookie = "KEYCLOAK_FORGOT=true"; 
-    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true")
+    if(isMobile){
+      window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true")
+    }
     return false
   });
 
@@ -123,6 +135,11 @@ window.onload = function () {
 
   prb_form.addEventListener('submit',function (e) {
     e.preventDefault(); 
+
+    if(!isMobile){
+      prb_form.submit();
+      return true;
+    }
 
     let userData = getUserToken(cpf.value.replace(/[^\d]+/g, ''), password.value, client_id, uri);
     userData.then(response => {return response; }).then(response => {
