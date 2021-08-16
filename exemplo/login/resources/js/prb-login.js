@@ -52,6 +52,11 @@ window.onload = function () {
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
 
+  function getToken(t){
+    document.cookie = "KEYCLOAK_ACCESS_TOKEN="+t;
+    window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
+  }
+
   my_cpf.addEventListener('keyup', function () {
     let cpf = my_cpf.value.replace(/[^\d]+/g, '');
 
@@ -74,8 +79,8 @@ window.onload = function () {
       error_cpf.style.display = 'none';
       password.focus();
       username.value = cpf;
-      window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf);
       document.cookie = "KEYCLOAK_USERNAME="+cpf; 
+      window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf)
     } else {
       username.classList.remove('error');
       password_label.style.display = 'flex';
@@ -88,8 +93,8 @@ window.onload = function () {
 
   forgout.addEventListener('click', function (e) {
     e.preventDefault();
-    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true");
     document.cookie = "KEYCLOAK_FORGOT=true"; 
+    window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true")
     return false
   });
 
@@ -118,44 +123,43 @@ window.onload = function () {
 
   prb_form.addEventListener('submit',function (e) {
     e.preventDefault(); 
-    let submitForm = getUserToken(cpf.value.replace(/[^\d]+/g, ''), password.value, client_id, uri);
-    if(!submitForm) prb_form.submit();
+
+    let userData = getUserToken(cpf.value.replace(/[^\d]+/g, ''), password.value, client_id, uri);
+    userData.then(response => {return response; }).then(response => {
+      getToken(response.access_token);
+    });
+    
+    return false;
+
   });
 
 };
 
-function getUserToken(u,p,c,h) {
-  var data = {
-    client_id: c,
-    username: u,
-    password: p,
-    grant_type: 'password',
-  };
+const getUserToken = async (u,p,c,h) => {
+  try {
+    var data = {
+      client_id: c,
+      username: u,
+      password: p,
+      grant_type: 'password',
+    };
 
-  var options = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Credentials': true,
-    },
-    method: 'POST',
-    mode: 'cors',
-    body: new URLSearchParams(data)
-  };
+    var axiosConfig = {
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;',
+          "Access-Control-Allow-Origin": "*",
+      }
+    };
 
-  fetch(h+'/protocol/openid-connect/token', options)
-  .then(res => res.json())
-  .then(response => {
-    if(response.access_token){ 
-      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+response.access_token);
-      document.cookie = "KEYCLOAK_ACCESS_TOKEN="+response.access_token;
-      window.location.href = h + '/account/'
+    const response = await axios.post(h+'/protocol/openid-connect/token/', new URLSearchParams(data), axiosConfig)
+    const userData = response.data;
+    if(userData.access_token){
+      return userData;
     }
+    return false;
+  } catch(e) {
+    throw e;
   }
-  ) 
-  .catch(error => console.error('Error: ', error));
-  return false;
 }
 
 $(document).ready(function () {
