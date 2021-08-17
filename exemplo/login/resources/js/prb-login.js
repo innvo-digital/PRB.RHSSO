@@ -33,11 +33,12 @@ function isValidCPF(cpf) {
   return true;
 }
 
-
+function getToken(t){
+  window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
+}
 
 window.onload = function () {
   const hostname = window.location.href;
-  const uaDataIsMobile = navigator.userAgentData?.mobile
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const realms = hostname.split('realms')[1].split('/')[1];
   const uri = hostname.split('auth')[0] +'auth/realms/'+realms
@@ -55,14 +56,6 @@ window.onload = function () {
   forgout.style.display = 'none';
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
-
-  function getToken(t){
-    document.cookie = "KEYCLOAK_ACCESS_TOKEN="+t;
-    
-    if(isMobile){
-      window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
-    }
-  }
 
   my_cpf.addEventListener('keyup', function () {
     let cpf = my_cpf.value.replace(/[^\d]+/g, '');
@@ -86,7 +79,7 @@ window.onload = function () {
       error_cpf.style.display = 'none';
       password.focus();
       username.value = cpf;
-      document.cookie = "KEYCLOAK_USERNAME="+cpf; 
+
       if(isMobile){
         window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf);
       }
@@ -145,14 +138,14 @@ window.onload = function () {
     userData.then(response => {return response; }).then(response => {
       getToken(response.access_token);
     });
-    
-    return false;
+
+    return true;
 
   });
 
 };
 
-const getUserToken = async (u,p,c,h) => {
+async function getUserToken(u,p,c,h){
   try {
     var data = {
       client_id: c,
