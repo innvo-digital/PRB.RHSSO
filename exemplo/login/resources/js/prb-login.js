@@ -176,7 +176,10 @@ async function getUserToken(u,p,c,h){
       return userData;
     }
     return false;
+    
   } catch(e) {
+      const prb_form = document.getElementById('prb-form');
+      prb_form.submit();
     throw e;
   }
 }
