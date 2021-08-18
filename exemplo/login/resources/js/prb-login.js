@@ -38,6 +38,14 @@ function getToken(t){
   window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t.access_token);
 }
 
+function maskCPF(cpf){
+  cpf=cpf.replace(/\D/g,"")
+  cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+  cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+  cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+  return cpf
+}
+
 window.onload = function () {
   const hostname = window.location.href;
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -57,10 +65,9 @@ window.onload = function () {
   forgout.style.display = 'none';
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
-
+  
   my_cpf.addEventListener('keyup', function () {
     let cpf = my_cpf.value.replace(/[^\d]+/g, '');
-
     if (cpf.length <= 10) {
       password_label.style.display = 'none';
       error_cpf.style.display = 'none';
@@ -89,6 +96,7 @@ window.onload = function () {
       username.classList.remove('error');
       password_label.style.display = 'flex';
     }
+    my_cpf.value = maskCPF(cpf);
   });
 
   password.addEventListener('focus', function (e) {
@@ -172,7 +180,3 @@ async function getUserToken(u,p,c,h){
     throw e;
   }
 }
-
-$(document).ready(function () {
-  $('#cpf').mask('000.000.000-00');
-});
