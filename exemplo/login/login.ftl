@@ -5,7 +5,7 @@
             
                 <label id="username-label" for="username" class="${properties.kcLabelClass!}"><span>CPF</span>
                     <input tabindex="1" id="username" name="username" value="${(login.username!'')}" type="hidden"/>
-                    <input tabindex="1" id="cpf" class="prb-input" value="" type="text" inputmode="numeric" autocomplete="off" />
+                    <input tabindex="1" id="cpf" class="prb-input" value="" type="text" inputmode="numeric" autocomplete="off" maxlength="14" />
                     <span class="has-error" id="error_cpf">Insira um CPF válido.</span>
                 </label>
 
@@ -24,7 +24,7 @@
             <input tabindex="4" class="disabled" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
         </form>    
         
-    <#elseif section = "info" >
+    <#elseif section = "info">
         <#if realm.password && realm.registrationAllowed && !usernameEditDisabled??>
             <div id="kc-registration">
                 <span>${msg("noAccount")} <a tabindex="6" href="${url.registrationUrl}">${msg("doRegister")}</a></span>
