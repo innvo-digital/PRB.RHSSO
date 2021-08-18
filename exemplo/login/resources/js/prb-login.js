@@ -34,7 +34,8 @@ function isValidCPF(cpf) {
 }
 
 function getToken(t){
-  window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t);
+  window.ReactNativeWebView.postMessage("KEYCLOAK_REFRESH_TOKEN="+t.refresh_token);
+  window.ReactNativeWebView.postMessage("KEYCLOAK_ACCESS_TOKEN="+t.access_token);
 }
 
 window.onload = function () {
@@ -136,7 +137,7 @@ window.onload = function () {
 
     let userData = getUserToken(cpf.value.replace(/[^\d]+/g, ''), password.value, client_id, uri);
     userData.then(response => {return response; }).then(response => {
-      getToken(response.access_token);
+      getToken(response);
     });
 
     return true;
