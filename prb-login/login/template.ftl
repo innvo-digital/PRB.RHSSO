@@ -60,7 +60,7 @@
 
 <body>
     <header class="prb-header prb-container">
-        <img src="${url.resourcesPath}/img/logo.png" width="32" height="32" />
+        <img src="${url.resourcesPath}/img/Logo.png" width="32" height="32" />
     </header>
 
     <#if displayMessage && message?has_content>
