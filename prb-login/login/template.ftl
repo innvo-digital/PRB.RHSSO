@@ -63,17 +63,38 @@
         <img src="${url.resourcesPath}/img/Logo.png" width="32" height="32" />
     </header>
 
-    <#if displayMessage && message?has_content>
-        <div class="prb-error">
-            <#--  <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>  -->
-            <#if message.type = 'warning'><span class="${properties.kcFeedbackWarningIcon!}"></span></#if>
-            <#if message.type = 'error'><span class="${properties.kcFeedbackErrorIcon!}"></span></#if>
-            <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
-            <span class="kc-feedback-text">${kcSanitize(message.summary)?no_esc}</span>
-        </div>
-    </#if> 
+    <main class="prb-container">
+        <div id="prb-text-cpf">
+            <p class="prb-title">
+                Informe o seu <span class="prb-highlight">CPF</span>
+            </p>
 
-    <#nested "form">
+            <p class="prb-text">
+                Este é um ambiente seguro. Seu CPF será usado apenas para validar a
+                sua identidade.
+            </p>
+        </div>
+
+        <div id="prb-text-password" class="hide">
+            <p class="prb-title">
+                Agora,<br />
+                informe sua <span class="prb-highlight">SENHA</span>
+            </p>
+
+            <p class="prb-text">
+                Sua senha precisa ter entre 6 a 8 números.
+            </p>
+        </div>
+
+        <#if displayMessage && message?has_content>
+            <span class="prb-error" id="prb-error-password">
+                O usuário ou senha digitado está incorreto.
+            </span>
+        </#if>
+
+        <#nested "form">
+
+    </main>
 </body>
     <#if properties.script?has_content>
         <#list properties.script?split(' ') as script>
