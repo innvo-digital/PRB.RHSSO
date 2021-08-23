@@ -29,9 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
   cpf.addEventListener("paste", function (event) {
     event.preventDefault();
 
-    let paste = mascaraCPF(
-      (event.clipboardData || window.clipboardData).getData("text")
-    );
+    let paste = (event.clipboardData || window.clipboardData).getData("text");
+
+    paste = apenasNumeros(paste);
+    paste = paste.slice(0, 11);
+    paste = mascaraCPF(paste);
 
     cpf.value = "";
     cpfHidden.value = "";
@@ -50,9 +52,10 @@ document.addEventListener("DOMContentLoaded", function () {
   passwordInput.addEventListener("paste", function (event) {
     event.preventDefault();
 
-    let paste = apenasNumeros(
-      (event.clipboardData || window.clipboardData).getData("text")
-    );
+    let paste = (event.clipboardData || window.clipboardData).getData("text");
+
+    paste = apenasNumeros(paste);
+    paste = paste.slice(0, 8);
 
     passwordInput.value = "";
     passwordInput.value = paste;
