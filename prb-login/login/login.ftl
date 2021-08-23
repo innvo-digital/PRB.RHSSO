@@ -4,29 +4,7 @@
 
         <form id="prb-form" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
 
-            <main class="prb-content prb-container">
-                <div id="prb-text-cpf">
-                    <p class="prb-title">
-                        Informe o seu 
-                        <span class="prb-highlight">CPF</span>
-                    </p>
-
-                    <p class="prb-text">
-                        Este é um ambiente seguro. Seu CPF será usado apenas para validar a sua identidade.
-                    </p>
-                </div>
-
-                <div id="prb-text-password" class="hide">
-                    <p class="prb-title">
-                        Agora,<br />
-                        informe sua 
-                        <span class="prb-highlight">SENHA</span>
-                    </p>
-
-                    <p class="prb-text">
-                        Sua senha precisa ter entre 6 a 8 dígitos entre letras e números.
-                    </p>
-                </div>
+            <div class="prb-content">
 
                 <div class="prb-input-group">
                     <label for="prb-cpf" class="prb-label">
@@ -49,7 +27,7 @@
                     />
                     <span class="prb-error hide" id="prb-erro-cpf">
                         Insira um CPF válido.
-                    </span>                    
+                    </span>
                 </div>
 
                 <div class="prb-input-group hide" id="prb-password">
@@ -68,9 +46,7 @@
                         maxlength="8"
                     />
                 </div>
-                <span class="prb-error hide" id="prb-error-password">
-                    A senha digitada está incorreta.
-                </span>
+                
 
                 <#if realm.resetPasswordAllowed>
                     <a 
@@ -82,7 +58,7 @@
                         Esqueci minha senha
                     </a>
                 </#if>
-            </main>
+            </div>
 
             <footer class="prb-footer prb-container">
                 <button

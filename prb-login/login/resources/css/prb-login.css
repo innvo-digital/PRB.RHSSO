@@ -56,6 +56,12 @@ body {
 }
 
 /* CONTENT */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 #prb-form {
   flex: 1;
   display: flex;
@@ -64,8 +70,6 @@ body {
 
 .prb-content {
   flex: 1;
-
-  padding: 48px 16px 24px;
 }
 
 /* TEXT */
@@ -99,12 +103,14 @@ body {
   line-height: 150%;
   letter-spacing: 0.4px;
   color: var(--primary-darker);
+
+  margin-bottom: 32px;
 }
 
 /* INPUT */
 
 .prb-input-group {
-  margin-top: 32px;
+  margin-bottom: 32px;
 }
 
 .prb-label {
@@ -159,7 +165,7 @@ span.prb-error {
 .prb-footer {
   width: 100%;
 
-  padding: 16px;
+  padding: 16px 0;
 }
 
 .prb-button {
@@ -179,6 +185,9 @@ span.prb-error {
 }
 
 .prb-button.disabled {
+  pointer-events: none;
+  cursor: default;
+
   color: var(--primary-light);
 
   background: var(--primary-lighter);
