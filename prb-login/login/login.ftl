@@ -88,7 +88,7 @@
                 <button
                     tabindex="3"
                     class="prb-button disabled"
-                    id="prb-button--login"
+                    id="prb-button-login"
                     name="login"
                     type="submit"
                 >

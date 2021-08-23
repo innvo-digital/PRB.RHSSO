@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const forgot = document.querySelector("#prb-forgot");
 
-  const button = document.querySelector("#prb-button");
+  const button = document.querySelector("#prb-button-login");
 
   //   VARIAVEIS DE CONTROLE
   let cpfValido = null;
