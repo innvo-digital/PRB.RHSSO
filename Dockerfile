@@ -2,7 +2,7 @@ FROM registry.access.redhat.com/ubi8:latest AS build
 USER root
 RUN yum install dos2unix -y
 WORKDIR /src
-COPY sso-extensions.cli .
+# COPY sso-extensions.cli .
 
 ENV SET_CONTAINER_TIMEZONE=true CONTAINER_TIMEZONE=America/Sao_Paulo TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -10,7 +10,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 COPY mssql-jdbc-7.4.1.jre8.jar .
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
 RUN ls -la
-RUN dos2unix sso-extensions.cli
+# RUN dos2unix sso-extensions.cli
 
 
 FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 AS final
@@ -19,6 +19,8 @@ COPY --from=build /src .
 
 #para cada template colocar em uma pasta destino diferente
 COPY /exemplo/ /opt/eap/themes/exemplo/
+RUN true
+COPY /prb-login/ /opt/eap/themes/prb-login/
 RUN true
 COPY /standalone.xml /opt/eap/standalone/configuration/
 RUN true
