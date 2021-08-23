@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const button = document.querySelector("#prb-button-login");
 
-  //   VARIAVEIS DE CONTROLE
+  // VARIAVEIS DE CONTROLE
   let cpfValido = null;
 
   // EVENTOS
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
   passwordInput.addEventListener("keyup", function () {
     passwordInput.value = apenasNumeros(passwordInput.value);
 
-    VerificaLiberaBotaoSubmit();
+    verificaLiberaBotaoSubmit();
   });
 
   passwordInput.addEventListener("paste", function (event) {
@@ -57,9 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
     passwordInput.value = "";
     passwordInput.value = paste;
 
-    VerificaLiberaBotaoSubmit();
+    verificaLiberaBotaoSubmit();
   });
 
+  // FUNÇÕES DE CONTROLE
   function verificaTratativasAposDigitarCPF(cpfMascarado) {
     if (cpf.value.length === 14) {
       cpfValido = validarCPF(cpfMascarado);
