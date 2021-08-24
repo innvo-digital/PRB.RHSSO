@@ -73,7 +73,7 @@
             </p>
         </div>
 
-        <div id="prb-text-password" class="hide">
+        <div id="prb-text-password" class="d-hide">
             <p class="prb-title">
                 Agora,<br />
                 informe sua <span class="prb-highlight">SENHA</span>

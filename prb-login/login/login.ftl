@@ -25,12 +25,12 @@
                         autocomplete="off"
                         maxlength="14"
                     />
-                    <span class="prb-error hide" id="prb-erro-cpf">
+                    <span class="prb-error d-hide" id="prb-erro-cpf">
                         Insira um CPF válido.
                     </span>
                 </div>
 
-                <div class="prb-input-group hide" id="prb-password">
+                <div class="prb-input-group v-hide" id="prb-password">
                     <label for="prb-password" class="prb-label">
                         Senha
                     </label>
@@ -51,7 +51,7 @@
                     <a 
                         href="${url.loginResetCredentialsUrl}"
                         tabindex="4"
-                        class="prb-forgot hide"
+                        class="prb-forgot d-hide"
                         id="prb-forgot"
                     >
                         Esqueci minha senha
