@@ -69,33 +69,33 @@ document.addEventListener("DOMContentLoaded", function () {
       cpfValido = validarCPF(cpfMascarado);
 
       if (cpfValido) {
-        cpfText.classList.add("hide");
-        passwordText.classList.remove("hide");
+        cpfText.classList.add("d-hide");
+        passwordText.classList.remove("d-hide");
 
-        password.classList.remove("hide");
+        password.classList.remove("v-hide");
         passwordInput.focus();
 
-        forgot.classList.remove("hide");
+        forgot.classList.remove("d-hide");
       } else {
-        cpfText.classList.remove("hide");
-        passwordText.classList.add("hide");
+        cpfText.classList.remove("d-hide");
+        passwordText.classList.add("d-hide");
 
         cpf.classList.add("prb-error");
-        cpfErro.classList.remove("hide");
+        cpfErro.classList.remove("d-hide");
       }
     } else {
       cpfValido = null;
 
-      cpfText.classList.remove("hide");
-      passwordText.classList.add("hide");
+      cpfText.classList.remove("d-hide");
+      passwordText.classList.add("d-hide");
 
       cpf.classList.remove("prb-error");
-      cpfErro.classList.add("hide");
+      cpfErro.classList.add("d-hide");
 
-      password.classList.add("hide");
+      password.classList.add("v-hide");
       passwordInput.value = "";
 
-      forgot.classList.add("hide");
+      forgot.classList.add("d-hide");
       button.classList.add("disabled");
     }
   }
