@@ -47,7 +47,6 @@
                     />
                 </div>
                 
-
                 <#if realm.resetPasswordAllowed>
                     <a 
                         href="${url.loginResetCredentialsUrl}"

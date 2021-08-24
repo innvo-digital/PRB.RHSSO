@@ -9,7 +9,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-
     <link rel="apple-touch-icon" sizes="57x57" href="${url.resourcesPath}/img/apple-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="${url.resourcesPath}/img/apple-icon-60x60.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="${url.resourcesPath}/img/apple-icon-72x72.png"/>
@@ -31,7 +30,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-    <script src="${url.resourcesPath}/js/axios.min.js"></script>
 
     <#if properties.meta?has_content>
         <#list properties.meta?split(' ') as meta>
@@ -39,7 +37,7 @@
         </#list>
     </#if>
 
-    <title>PrbLogin</title>
+    <title>Paraná Banco - Login</title>
 
     <#if properties.styles?has_content>
         <#list properties.styles?split(' ') as style>
@@ -82,7 +80,7 @@
             </p>
 
             <p class="prb-text">
-                Sua senha precisa ter entre 6 a 8 números.
+                Sua senha precisa ter entre 6 e 8 números.
             </p>
         </div>
 
