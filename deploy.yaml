@@ -57,11 +57,11 @@ spec:
             - /bin/bash
             - -c
             - /opt/eap/bin/livenessProbe.sh
-          failureThreshold: 3
+          #failureThreshold: 3
           initialDelaySeconds: 120
-          periodSeconds: 10
+          periodSeconds: 60
           successThreshold: 1
-          timeoutSeconds: 1
+          timeoutSeconds: 5
         name: sso
         ports:
         - containerPort: 8778
@@ -82,10 +82,11 @@ spec:
             - /bin/bash
             - -c
             - /opt/eap/bin/readinessProbe.sh
-          failureThreshold: 3
-          periodSeconds: 120
+          #failureThreshold: 3
+          initialDelaySeconds: 120
+          periodSeconds: 60
           successThreshold: 1
-          timeoutSeconds: 1
+          timeoutSeconds: 5
         resources:
           limits:
             memory: #{MEMORY}#
