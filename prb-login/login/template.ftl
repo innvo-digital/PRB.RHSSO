@@ -86,7 +86,7 @@
 
         <#if displayMessage && message?has_content>
             <span class="prb-error" id="prb-error-password">
-                O usuário ou senha digitado está incorreto.
+                O CPF ou senha digitado está incorreto.
             </span>
         </#if>
 
