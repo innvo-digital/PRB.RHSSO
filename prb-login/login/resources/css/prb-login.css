@@ -55,7 +55,8 @@ body {
 }
 
 .prb-header img {
-  width: initial;
+  width: 32px;
+  height: 32px;
 
   display: block;
 
