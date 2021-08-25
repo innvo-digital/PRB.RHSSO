@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const forgot = document.querySelector("#prb-forgot");
 
+  const errorPassword = document.querySelector("#prb-error-password");
+
   const button = document.querySelector("#prb-button-login");
 
   // VARIAVEIS DE CONTROLE
@@ -18,10 +20,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // EVENTOS
   cpf.addEventListener("keyup", function () {
-    const cpfMascarado = mascaraCPF(cpf.value);
+    const cpfMascarado = mascaraCPF(cpf.value.slice(0, 11));
 
     cpf.value = cpfMascarado;
-    cpfHidden.value = apenasNumeros(cpf.value);
+    cpfHidden.value = apenasNumeros(cpf.value.slice(0, 11));
 
     verificaTratativasAposDigitarCPF(cpfMascarado);
   });
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   passwordInput.addEventListener("keyup", function () {
-    passwordInput.value = apenasNumeros(passwordInput.value);
+    passwordInput.value = apenasNumeros(passwordInput.value.slice(0, 8));
 
     verificaLiberaBotaoSubmit();
   });
@@ -65,6 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // FUNÇÕES DE CONTROLE
   function verificaTratativasAposDigitarCPF(cpfMascarado) {
+    errorPassword.classList.add("d-hide");
+
     if (cpf.value.length === 14) {
       cpfValido = validarCPF(cpfMascarado);
 
