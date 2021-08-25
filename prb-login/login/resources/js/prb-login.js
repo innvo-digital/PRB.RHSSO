@@ -20,10 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // EVENTOS
   cpf.addEventListener("keyup", function () {
-    const cpfMascarado = mascaraCPF(cpf.value.slice(0, 11));
+    const cpfLimitado = cpf.value.slice(0, 14);
+    const cpfMascarado = mascaraCPF(cpfLimitado);
 
     cpf.value = cpfMascarado;
-    cpfHidden.value = apenasNumeros(cpf.value.slice(0, 11));
+    cpfHidden.value = apenasNumeros(cpfLimitado);
 
     verificaTratativasAposDigitarCPF(cpfMascarado);
   });
