@@ -7,7 +7,10 @@
             <div class="prb-content">
 
                 <div class="prb-input-group">
-                    <label for="prb-cpf" class="prb-label">
+                    <label 
+                        for="prb-input-cpf"
+                        class="prb-label"
+                    >
                         CPF
                     </label>
                     <input 
@@ -25,20 +28,28 @@
                         autocomplete="off"
                         maxlength="14"
                     />
-                    <span class="prb-error d-hide" id="prb-erro-cpf">
-                        Insira um CPF válido.
+                    <span
+                        class="prb-error hide"
+                        id="prb-erro-cpf"
+                    >
+                        O CPF digitado está incorreto.
                     </span>
                 </div>
 
-                <div class="prb-input-group v-hide" id="prb-password">
-                    <label for="prb-password" class="prb-label">
+                <div class="prb-input-group">
+                    <label 
+                        for="password"
+                        id="prb-label-senha"
+                        class="prb-label disabled"
+                    >
                         Senha
                     </label>
                     <input
                         tabindex="2"
-
                         type="password"
                         class="prb-input"
+                        disabled
+                        placeholder="••••••"
                         id="password"
                         name="password"
                         inputmode="numeric"
@@ -49,9 +60,9 @@
                 
                 <#if realm.resetPasswordAllowed>
                     <a 
-                        href="${url.loginResetCredentialsUrl}"
                         tabindex="4"
-                        class="prb-forgot d-hide"
+                        href="${url.loginResetCredentialsUrl}"
+                        class="prb-forgot"
                         id="prb-forgot"
                     >
                         Esqueci minha senha
@@ -62,7 +73,8 @@
             <footer class="prb-footer prb-container">
                 <button
                     tabindex="3"
-                    class="prb-button disabled"
+                    disabled
+                    class="prb-button"
                     id="prb-button-login"
                     name="login"
                     type="submit"
