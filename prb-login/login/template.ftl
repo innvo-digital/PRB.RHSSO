@@ -73,7 +73,7 @@
 
         <#if displayMessage && message?has_content>
             <span 
-                class="prb-error hide"
+                class="prb-error"
                 id="prb-error-login"
             >
                 O CPF ou senha digitados estão incorretos, confira os campos novamente.
