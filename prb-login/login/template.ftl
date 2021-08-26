@@ -62,31 +62,21 @@
     </header>
 
     <main class="prb-container">
-        <div id="prb-text-cpf">
-            <p class="prb-title">
-                Informe o seu <span class="prb-highlight">CPF</span>
-            </p>
+        <h1 class="prb-title">
+            <span class="prb-highlight">Acesse </span>
+            sua conta
+        </h1>
 
-            <p class="prb-text">
-                Este é um ambiente seguro. Seu CPF será usado apenas para validar a
-                sua identidade.
-            </p>
-        </div>
-
-        <div id="prb-text-password" class="d-hide">
-            <p class="prb-title">
-                Agora,<br />
-                informe sua <span class="prb-highlight">SENHA</span>
-            </p>
-
-            <p class="prb-text">
-                Sua senha precisa ter entre 6 e 8 números.
-            </p>
-        </div>
+        <p class="prb-text">
+            Este é um ambiente seguro. Seu CPF será usado apenas para validar a sua identidade.
+        </p>
 
         <#if displayMessage && message?has_content>
-            <span class="prb-error" id="prb-error-password">
-                O CPF ou senha digitado está incorreto.
+            <span 
+                class="prb-error hide"
+                id="prb-error-login"
+            >
+                O CPF ou senha digitados estão incorretos, confira os campos novamente.
             </span>
         </#if>
 

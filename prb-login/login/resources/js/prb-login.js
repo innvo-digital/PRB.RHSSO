@@ -1,25 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   // ELEMENTOS DE TELA
-  const cpfText = document.querySelector("#prb-text-cpf");
   const cpfHidden = document.querySelector("#username");
   const cpf = document.querySelector("#prb-input-cpf");
   const cpfErro = document.querySelector("#prb-erro-cpf");
 
-  const passwordText = document.querySelector("#prb-text-password");
-  const password = document.querySelector("#prb-password");
-  const passwordInput = document.querySelector("#password");
+  const passwordLabel = document.querySelector("#prb-label-senha");
+  const password = document.querySelector("#password");
 
-  const forgot = document.querySelector("#prb-forgot");
-
-  const errorPassword = document.querySelector("#prb-error-password");
+  const errorLogin = document.querySelector("#prb-error-login");
 
   const button = document.querySelector("#prb-button-login");
 
-  // VARIAVEIS DE CONTROLE
-  let cpfValido = null;
-
   // EVENTOS
-  cpf.addEventListener("keyup", function () {
+  cpf.addEventListener("input", function () {
     const cpfLimitado = cpf.value.slice(0, 14);
     const cpfMascarado = mascaraCPF(cpfLimitado);
 
@@ -46,13 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
     verificaTratativasAposDigitarCPF(paste);
   });
 
-  passwordInput.addEventListener("keyup", function () {
-    passwordInput.value = apenasNumeros(passwordInput.value.slice(0, 8));
+  password.addEventListener("input", function () {
+    password.value = apenasNumeros(password.value.slice(0, 8));
 
     verificaLiberaBotaoSubmit();
   });
 
-  passwordInput.addEventListener("paste", function (event) {
+  password.addEventListener("paste", function (event) {
     event.preventDefault();
 
     let paste = (event.clipboardData || window.clipboardData).getData("text");
@@ -60,56 +53,49 @@ document.addEventListener("DOMContentLoaded", function () {
     paste = apenasNumeros(paste);
     paste = paste.slice(0, 8);
 
-    passwordInput.value = "";
-    passwordInput.value = paste;
+    password.value = "";
+    password.value = paste;
 
     verificaLiberaBotaoSubmit();
   });
 
   // FUNÇÕES DE CONTROLE
   function verificaTratativasAposDigitarCPF(cpfMascarado) {
-    errorPassword.classList.add("d-hide");
+    if (errorLogin) {
+      errorLogin.classList.add("hide");
+    }
 
-    if (cpf.value.length === 14) {
-      cpfValido = validarCPF(cpfMascarado);
+    if (cpfMascarado.length === 14) {
+      const cpfValido = validarCPF(cpfMascarado);
 
       if (cpfValido) {
-        cpfText.classList.add("d-hide");
-        passwordText.classList.remove("d-hide");
+        cpf.classList.remove("prb-error");
+        cpfErro.classList.add("hide");
 
-        password.classList.remove("v-hide");
-        passwordInput.focus();
-
-        forgot.classList.remove("d-hide");
+        passwordLabel.classList.remove("disabled");
+        password.removeAttribute("disabled");
+        password.focus();
       } else {
-        cpfText.classList.remove("d-hide");
-        passwordText.classList.add("d-hide");
-
         cpf.classList.add("prb-error");
-        cpfErro.classList.remove("d-hide");
+        cpfErro.classList.remove("hide");
       }
     } else {
-      cpfValido = null;
-
-      cpfText.classList.remove("d-hide");
-      passwordText.classList.add("d-hide");
-
       cpf.classList.remove("prb-error");
-      cpfErro.classList.add("d-hide");
+      cpfErro.classList.add("hide");
 
-      password.classList.add("v-hide");
-      passwordInput.value = "";
+      passwordLabel.classList.add("disabled");
+      password.value = "";
+      password.setAttribute("disabled", "disabled");
 
-      forgot.classList.add("d-hide");
-      button.classList.add("disabled");
+      verificaLiberaBotaoSubmit();
     }
   }
 
   function verificaLiberaBotaoSubmit() {
-    if (passwordInput.value.length >= 6 && passwordInput.value.length <= 8) {
-      button.classList.remove("disabled");
+    if (password.value.length >= 6 && password.value.length <= 8) {
+      button.removeAttribute("disabled");
     } else {
-      button.classList.add("disabled");
+      button.setAttribute("disabled", "disabled");
     }
   }
 
