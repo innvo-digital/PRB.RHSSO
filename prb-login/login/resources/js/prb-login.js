@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
       errorLogin.classList.add("hide");
     }
 
-    linkForgot.setAttribute("href", "prbapp/forgot");
+    linkForgot.setAttribute("href", "prbapp://forgot");
 
     if (cpfMascarado.length === 14) {
       const cpfValido = validarCPF(cpfMascarado);
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         linkForgot.setAttribute(
           "href",
-          `prbapp/forgot/${apenasNumeros(cpfMascarado)}`
+          `prbapp://forgot/${apenasNumeros(cpfMascarado)}`
         );
       } else {
         cpf.classList.add("prb-error");
