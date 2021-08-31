@@ -119,12 +119,16 @@ main {
   letter-spacing: 0.4px;
   color: var(--primary-darker);
 
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 /* INPUT */
 .prb-input-group {
-  margin-bottom: 32px;
+  margin: 16px 0 32px;
+}
+
+.prb-input-group + .prb-input-group {
+  margin-bottom: 16px;
 }
 
 .prb-label {

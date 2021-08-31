@@ -61,7 +61,7 @@
                 <#if realm.resetPasswordAllowed>
                     <a 
                         tabindex="4"
-                        href="prbapp/forgot"
+                        href="prbapp://forgot"
                         class="prb-forgot"
                         id="prb-link-forgot"
                     >
