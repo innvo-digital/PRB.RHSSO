@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const errorLogin = document.querySelector("#prb-error-login");
 
+  const linkForgot = document.querySelector("#prb-link-forgot");
   const button = document.querySelector("#prb-button-login");
 
   // EVENTOS
@@ -65,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
       errorLogin.classList.add("hide");
     }
 
+    linkForgot.setAttribute("href", "prbapp/forgot");
+
     if (cpfMascarado.length === 14) {
       const cpfValido = validarCPF(cpfMascarado);
 
@@ -75,6 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
         passwordLabel.classList.remove("disabled");
         password.removeAttribute("disabled");
         password.focus();
+
+        linkForgot.setAttribute(
+          "href",
+          `prbapp/forgot/${apenasNumeros(cpfMascarado)}`
+        );
       } else {
         cpf.classList.add("prb-error");
         cpfErro.classList.remove("hide");
