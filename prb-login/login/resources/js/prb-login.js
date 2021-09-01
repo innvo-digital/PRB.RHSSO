@@ -60,13 +60,18 @@ document.addEventListener("DOMContentLoaded", function () {
     verificaLiberaBotaoSubmit();
   });
 
+  linkForgot.addEventListener("click", function (event) {
+    if (isMobile()) {
+      event.preventDefault();
+      window.location.href = `prbapp://forgot/${cpfHidden.value}`;
+    }
+  });
+
   // FUNÇÕES DE CONTROLE
   function verificaTratativasAposDigitarCPF(cpfMascarado) {
     if (errorLogin) {
       errorLogin.classList.add("hide");
     }
-
-    linkForgot.setAttribute("href", "prbapp://forgot");
 
     if (cpfMascarado.length === 14) {
       const cpfValido = validarCPF(cpfMascarado);
@@ -78,11 +83,6 @@ document.addEventListener("DOMContentLoaded", function () {
         passwordLabel.classList.remove("disabled");
         password.removeAttribute("disabled");
         password.focus();
-
-        linkForgot.setAttribute(
-          "href",
-          `prbapp://forgot/${apenasNumeros(cpfMascarado)}`
-        );
       } else {
         cpf.classList.add("prb-error");
         cpfErro.classList.remove("hide");
@@ -108,6 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //   HELPERS
+  function isMobile() {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  }
+
   function mascaraCPF(cpf) {
     cpf = cpf.replace(/\D/g, "");
     cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
