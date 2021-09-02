@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const button = document.querySelector("#prb-button-login");
 
   // EVENTOS
-  cpf.addEventListener("input", function () {
+  cpf.addEventListener("keyup", function () {
     const cpfLimitado = cpf.value.slice(0, 14);
     const cpfMascarado = mascaraCPF(cpfLimitado);
 

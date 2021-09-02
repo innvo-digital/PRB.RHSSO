@@ -26,6 +26,9 @@
                         id="prb-input-cpf"
                         inputmode="numeric"
                         autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
                         maxlength="14"
                     />
                     <span
