@@ -38,8 +38,8 @@ jobs:
 - job: 'Homolog'
   pool:
     name: Azure Servers
-#  variables:
-#    - group: "HOM - SSO"
+  variables:
+    - group: "HOM - SSO"
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
@@ -75,8 +75,8 @@ jobs:
 - job: 'Production'
   pool:
     name: Azure Servers
-#  variables:
-#    - group: "PROD - SSO"
+  variables:
+    - group: "PROD - SSO"
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
