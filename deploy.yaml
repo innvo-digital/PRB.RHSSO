@@ -164,8 +164,8 @@ metadata:
   name: sso
   namespace: #{APP_NAMESPACE}#
 spec:
-  maxReplicas: 6
-  minReplicas: 3
+  maxReplicas: #{MAX_HPA}#
+  minReplicas: #{MIN_HPA}#
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
