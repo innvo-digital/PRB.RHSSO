@@ -1,23 +1,110 @@
-pool:
-  name: Azure Servers
-  demands: sh
+jobs:
+- job: 'Development'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "OpenShift - Development - SSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      targetFiles: '**/*.yaml'
+  
+  - task: DockerCompose@0
+    displayName: 'Build Service'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHAT
+      action: 'Build services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+  
+  - task: DockerCompose@0
+    displayName: 'Push Service'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD'
+      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
+      action: 'Push services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
 
-steps:
-- task: DockerCompose@0
-  displayName: 'Build Service'
-  inputs:
-    containerregistrytype: 'Container Registry'
-    dockerRegistryEndpoint: RedHAT
-    action: 'Build services'
-    additionalImageTags: '$(Build.BuildNumber)'
-    dockerComposeCommand: '--no-cache'
-    includeLatestTag: true
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/dev'))
 
-- task: DockerCompose@0
-  displayName: 'Push Service'
-  inputs:
-    azureSubscription: 'AzurePRB_DEV'
-    azureContainerRegistry: '{"loginServer":"keycloakbrq.azurecr.io", "id" : "/subscriptions/19d24e10-1ddf-4f7e-9615-abd8dc3b88d3/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/keycloakbrq"}'
-    action: 'Push services'
-    additionalImageTags: '$(Build.BuildNumber)'
-    includeLatestTag: true
+- job: 'Homolog'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "HOM - SSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      targetFiles: '**/*.yaml'
+  
+  - task: DockerCompose@0
+    displayName: 'Build Service'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHAT
+      action: 'Build services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+      dockerComposeCommand: '--no-cache'
+  
+  - task: DockerCompose@0
+    displayName: 'Push Service'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD'
+      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
+      action: 'Push services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
+
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/homolog'))
+
+- job: 'Production'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "PROD - SSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      targetFiles: '**/*.yaml'
+  
+  - task: DockerCompose@0
+    displayName: 'Build Service'
+    inputs:
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHAT
+      action: 'Build services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+      dockerComposeCommand: '--no-cache'
+  
+  - task: DockerCompose@0
+    displayName: 'Push Service'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD'
+      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
+      action: 'Push services'
+      additionalImageTags: '$(Build.BuildNumber)'
+      includeLatestTag: true
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
+
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master'))

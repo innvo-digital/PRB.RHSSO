@@ -12,5 +12,5 @@ Dentro das configurações do Docker, va na opção `Docker Engine` e adicione o
 
 ```
 docker build --tag rhsso .
-docker run --name teste --publish 8080:8080 --mount type=bind,source="/Volumes/SSDB/SERVER/parana-banco/PrbKeycloak/exemplo",target=/opt/eap/themes/exemplo -i rhsso
+docker run --name teste --publish 8080:8080 --mount type=bind,source="/var/tmp/exemplo",target=/opt/eap/themes/exemplo -e SSO_ADMIN_USERNAME=admin -e SSO_ADMIN_PASSWORD=admin -i rhsso
 ```

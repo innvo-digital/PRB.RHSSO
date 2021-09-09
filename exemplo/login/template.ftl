@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <script src="${url.resourcesPath}/js/axios.min.js"></script>
 
     <#if properties.meta?has_content>
         <#list properties.meta?split(' ') as meta>
@@ -38,19 +39,14 @@
 </head>
 
 <body class="${properties.kcBodyClass!}">
+<div class="prb-login">
     <div class="prb-header">
         <img src="${url.resourcesPath}/img/Logo.png" width="32" height="32">
     </div>
 
-    <div class="prb-title">Agora,<br /> informe sua <span class="prb-highlight">SENHA</span></div>
-    
-    <div class="prb-text">Sua senha precisa ter entre 6 a 8 dígitos entre letras e números.</div>
-    
-    <#nested "form"> 
-
-    <#-- <div class="${properties.kcFormCardClass!} <#if displayWide>${properties.kcFormCardAccountClass!}</#if>">
-        <div id="kc-content">
-            <div id="kc-content-wrapper">
+    <div class="prb-title">Acesse sua <span class="prb-highlight">conta</span></div>
+        
+               
                 <#if displayMessage && message?has_content>
                     <div class="alert alert-${message.type}">
                         <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
@@ -59,56 +55,23 @@
                         <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
                         <span class="kc-feedback-text">${kcSanitize(message.summary)?no_esc}</span>
                     </div>
-                </#if>  
+                </#if> 
 
-                <#nested "form">
-
-                  <#if displayInfo>
+                <#if displayInfo>
                     <div id="kc-info" class="${properties.kcSignUpClass!}">
                         <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
                             <#nested "info">
                         </div>
                     </div>
                 </#if>  
-            </div>
-        </div>
-
-    </div>-->
+                <#nested "form">
+        
+    </div>
 </body>
-<script type="text/javascript">
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
-    const password_label = document.getElementById('password-label');
-    const login_btn = document.getElementById('prb-btn-login');
-
-    if(!!password_label){
-        password_label.style.display = 'none';
-
-        username.addEventListener('keyup',function() {
-            username.classList.remove('error');
-
-            if(username.value.length === 1){
-                password_label.style.display = 'flex';
-            }
-        })
-
-        username.addEventListener('blur',function() {
-            if(username.value.length === 0){
-                username.classList.add('error');
-            }
-        })
-
-
-        password.addEventListener('keyup',function() {
-            if(password.value.length >= 6){
-                login_btn.classList.remove('disabled');
-            }
-            else {
-                login_btn.classList.add('disabled');
-            }
-        })
-    }
-
-</script>
+    <#if properties.script?has_content>
+        <#list properties.script?split(' ') as script>
+            <script src="${url.resourcesPath}/${script}" type="text/javascript"></script>
+        </#list>
+    </#if>
 </html>
 </#macro>
