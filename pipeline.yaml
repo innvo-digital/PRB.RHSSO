@@ -9,7 +9,9 @@ jobs:
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
       targetFiles: '**/*.yaml'
-  
+      targetFiles: |
+        **/*.yaml
+        **/*.cli 
   - task: DockerCompose@0
     displayName: 'Build Service'
     inputs:
