@@ -46,7 +46,9 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
-      targetFiles: '**/*.yaml'
+      targetFiles: |
+        **/*.yaml
+        **/*.cli 
   
   - task: DockerCompose@0
     displayName: 'Build Service'
@@ -83,7 +85,9 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
-      targetFiles: '**/*.yaml'
+      targetFiles: |
+        **/*.yaml
+        **/*.cli 
   
   - task: DockerCompose@0
     displayName: 'Build Service'
