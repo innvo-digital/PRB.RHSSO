@@ -10,7 +10,7 @@ jobs:
     inputs:
       targetFiles: |
         **/*.yaml
-        **/*.cli 
+        **/*.cli
 
   - task: DockerCompose@0
     displayName: 'Build Service'
