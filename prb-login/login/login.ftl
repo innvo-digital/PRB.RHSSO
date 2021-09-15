@@ -64,7 +64,7 @@
                 <#if realm.resetPasswordAllowed>
                     <a 
                         tabindex="4"
-                        href="${url.loginResetCredentialsUrl}"
+                        href="prbapp://forgot"
                         class="prb-forgot"
                         id="prb-link-forgot"
                     >
