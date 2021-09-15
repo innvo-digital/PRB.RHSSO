@@ -60,23 +60,23 @@ document.addEventListener("DOMContentLoaded", function () {
     verificaLiberaBotaoSubmit();
   });
 
-  linkForgot.addEventListener("click", function (event) {
-    if (isMobile()) {
-      event.preventDefault();
-      window.location.href = `prbapp://forgot/${cpfHidden.value}`;
-    }
-  });
-
   // FUNÇÕES DE CONTROLE
   function verificaTratativasAposDigitarCPF(cpfMascarado) {
     if (errorLogin) {
       errorLogin.classList.add("hide");
     }
 
+    linkForgot.setAttribute("href", "prbapp://forgot");
+
     if (cpfMascarado.length === 14) {
       const cpfValido = validarCPF(cpfMascarado);
 
       if (cpfValido) {
+        linkForgot.setAttribute(
+          "href",
+          `prbapp://forgot/${apenasNumeros(cpfMascarado)}`
+        );
+
         cpf.classList.remove("prb-error");
         cpfErro.classList.add("hide");
 
