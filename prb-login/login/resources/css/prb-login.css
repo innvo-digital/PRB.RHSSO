@@ -239,3 +239,11 @@ span.prb-error {
   background: var(--primary-lighter);
   box-shadow: none;
 }
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/Montserrat-Regular.ttf) format('ttf');
+}
