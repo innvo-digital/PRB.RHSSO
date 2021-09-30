@@ -27,6 +27,9 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png"/>
     <meta name="theme-color" content="#1a53ff"/>
 
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://puk13217.live.dynatrace.com">
+
+
     <#if properties.meta?has_content>
         <#list properties.meta?split(' ') as meta>
             <meta name="${meta?split('==')[0]}" content="${meta?split('==')[1]}"/>
