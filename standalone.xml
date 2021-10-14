@@ -159,15 +159,26 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE</connection-url>
-                    <driver>h2</driver>
+                  <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" pool-name="MyPoolName" enabled="true" use-java-context="true">
+                    <connection-url>#{DB_JDBC_URL}#</connection-url>
+                    <driver>sqlserver</driver>
                     <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
+                        <user-name>#{DB_USERNAME}</user-name>
+                        <password>#{DB_PASSWORD}</password>
                     </security>
+                     <pool>
+                        <min-pool-size>1</min-pool-size>
+                        <max-pool-size>10</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+                    <validation>
+                    <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"></valid-connection-checker>
+                    </validation>
                 </datasource>
                 <drivers>
+                    <driver name="sqlserver" module="com.microsoft">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+                    </driver>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
