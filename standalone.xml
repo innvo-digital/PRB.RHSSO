@@ -166,11 +166,23 @@
                         <user-name>#{DB_USERNAME}</user-name>
                         <password>#{DB_PASSWORD}</password>
                     </security>
-                     <pool>
-                        <min-pool-size>1</min-pool-size>
-                        <max-pool-size>10</max-pool-size>
+                    
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>50</max-pool-size>
                         <prefill>true</prefill>
                     </pool>
+
+                    <timeout>
+                             <blocking-timeout-millis>5000</blocking-timeout-millis>
+                             <idle-timeout-minutes>15</idle-timeout-minutes>
+                             <set-tx-query-timeout/>
+                     </timeout>
+                       
+                     <statement>
+                         <track-statements>false</track-statements>
+                     </statement>
+
                     <validation>
                     <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"></valid-connection-checker>
                     </validation>
