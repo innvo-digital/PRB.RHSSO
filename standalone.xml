@@ -163,8 +163,8 @@
                     <connection-url>#{DB_JDBC_URL}#</connection-url>
                     <driver>sqlserver</driver>
                     <security>
-                        <user-name>#{DB_USERNAME}</user-name>
-                        <password>#{DB_PASSWORD}</password>
+                        <user-name>#{DB_USERNAME}#</user-name>
+                        <password>#{DB_PASSWORD}#</password>
                     </security>
                     
                     <pool>
