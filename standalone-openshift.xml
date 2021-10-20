@@ -124,8 +124,8 @@
         <subsystem xmlns="urn:jboss:domain:bean-validation:1.0"/>
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:5.0">
-            <datasources>
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
+              <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
                     <driver>h2</driver>
                     <security>
@@ -133,24 +133,45 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;</connection-url>
-                    <driver>mssql</driver>
+                  <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" pool-name="MyPoolName" enabled="true" use-java-context="true">
+                    <connection-url>#{DB_JDBC_URL}#</connection-url>
+                    <driver>com.mssql</driver>
                     <security>
-                        <user-name>User_d_prbrhsso</user-name>
-                        <password>9Pu78MklZaW14d</password>
+                        <user-name>#{DB_USERNAME}#</user-name>
+                        <password>#{DB_PASSWORD}#</password>
                     </security>
+                    
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>50</max-pool-size>
+                        <prefill>true</prefill>
+                    </pool>
+
+                    <timeout>
+                             <blocking-timeout-millis>5000</blocking-timeout-millis>
+                             <idle-timeout-minutes>15</idle-timeout-minutes>
+                             <set-tx-query-timeout/>
+                     </timeout>
+                       
+                    <validation>
+                        <check-valid-connection-sql>select 1</check-valid-connection-sql>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>true</background-validation>
+                        <background-validation-millis>10000</background-validation-millis>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mssql.MSSQLValidConnectionChecker"></valid-connection-checker>
+                    </validation>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+
+                    
                 </datasource>
                 <drivers>
+                    <driver name="com.mssql" module="com.mssql">
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
+                    </driver>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="postgresql" module="org.postgresql">
-                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="mssql" module="com.mssql">
-                        <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
-                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
                     </driver>
                 </drivers>
             </datasources>
