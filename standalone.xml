@@ -161,7 +161,7 @@
                 </datasource>
                   <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" pool-name="MyPoolName" enabled="true" use-java-context="true">
                     <connection-url>#{DB_JDBC_URL}#</connection-url>
-                    <driver>mssql</driver>
+                    <driver>com.mssql</driver>
                     <security>
                         <user-name>#{DB_USERNAME}#</user-name>
                         <password>#{DB_PASSWORD}#</password>
@@ -193,7 +193,7 @@
                     
                 </datasource>
                 <drivers>
-                    <driver name="mssql" module="com.microsoft">
+                    <driver name="com.mssql" module="com.mssql">
                         <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
                     </driver>
                     <driver name="h2" module="com.h2database.h2">
