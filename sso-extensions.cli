@@ -8,7 +8,7 @@ set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
 set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;"
 set DB_EAP_MODULE=com.mssql
 
-set FILE=/opt/eap/extensions/mssql-jdbc-7.4.1.jre8.jar
+set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
 
 module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,javax.resource.api
 /subsystem=datasources/jdbc-driver=$DB_DRIVER_NAME:add( \
@@ -17,23 +17,18 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   driver-class-name=$DB_DRIVER, \
   driver-xa-datasource-class-name=$DB_XA_DRIVER \
 )
-/subsystem=datasources/data-source=ExampleDS:remove()
 /subsystem=datasources/data-source=KeycloakDS:remove()
 /subsystem=datasources/data-source=KeycloakDS:add( \
-  jndi-name=java:jboss/datasources/KeycloakDS, \
-  enabled=true, \
-  use-java-context=true, \
-  connection-url=$DB_JDBC_URL, \
-  driver-name=$DB_DRIVER_NAME, \
-  user-name=$DB_USERNAME, \
-  password=$DB_PASSWORD, \
-  check-valid-connection-sql=\"SELECT 1\",       \
-  validate-on-match=true,                        \
-  background-validation=false,                   \
-  share-prepared-statements=false
-)
-
-/subsystem=datasources/jdbc-driver=sqlserver:add(driver-name=sqlserver,driver-module-name=com.microsoft,
-driver-xa-datasource-class-name=com.microsoft.sqlserver.jdbc.SQLServerXADataSource)
+  jndi-name=java:jboss/datasources/KeycloakDS,\
+  enabled=true,\
+  use-java-context=true,\
+  connection-url=$DB_JDBC_URL,\
+  driver-name=$DB_DRIVER_NAME,\
+  user-name=$DB_USERNAME,\
+  password=$DB_PASSWORD,\
+  check-valid-connection-sql="SELECT 1",\
+  validate-on-match=true,\
+  background-validation=false,\
+  share-prepared-statements=false)
 
 run-batch 

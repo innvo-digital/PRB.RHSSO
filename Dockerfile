@@ -7,7 +7,7 @@ COPY sso-extensions.cli .
 ENV SET_CONTAINER_TIMEZONE=true CONTAINER_TIMEZONE=America/Sao_Paulo TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY mssql-jdbc-7.4.1.jre8.jar .
+COPY mssql-jdbc-9.2.1.jre11.jar .
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
 RUN ls -la
 RUN dos2unix sso-extensions.cli
@@ -21,10 +21,6 @@ COPY --from=build /src .
 COPY /exemplo/ /opt/eap/themes/exemplo/
 RUN true
 COPY /prb-login/ /opt/eap/themes/prb-login/
-#RUN true
-#COPY /standalone.xml /opt/eap/standalone/configuration/
-#RUN true
-#COPY /standalone-openshift.xml /opt/eap/standalone/configuration/
 RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
 RUN true
