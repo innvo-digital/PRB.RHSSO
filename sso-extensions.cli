@@ -1,6 +1,6 @@
 batch
 
-set DB_DRIVER_NAME=mssql
+set DB_DRIVER_NAME=com.mssql
 set DB_USERNAME=#{DB_USERNAME}#
 set DB_PASSWORD=#{DB_PASSWORD}#
 set DB_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
