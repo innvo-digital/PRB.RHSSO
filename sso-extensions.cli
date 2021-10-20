@@ -17,6 +17,7 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   driver-class-name=$DB_DRIVER, \
   driver-xa-datasource-class-name=$DB_XA_DRIVER \
 )
+/subsystem=datasources/data-source=KeycloakDS:remove()
 
 
 run-batch 
