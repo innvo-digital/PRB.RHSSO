@@ -21,10 +21,10 @@ COPY --from=build /src .
 COPY /exemplo/ /opt/eap/themes/exemplo/
 RUN true
 COPY /prb-login/ /opt/eap/themes/prb-login/
-#RUN true
-#COPY /standalone.xml /opt/eap/standalone/configuration/
 RUN true
-COPY /standalone-openshift.xml /opt/eap/standalone/configuration/
+COPY /standalone.xml /opt/eap/standalone/configuration/
+#RUN true
+#COPY /standalone-openshift.xml /opt/eap/standalone/configuration/
 RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
 RUN true
