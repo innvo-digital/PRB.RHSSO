@@ -45,7 +45,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="/opt/eap/keystores/https-keystore.jks" keystore-password="5thulPhXWXiOUKTterDumL8NZRq05LLpBomu7LwEyBI="/>
+                        <keystore path="/opt/eap/keystores/https-keystore.jks" keystore-password="8FZ9tyti6+JQSLYUR1q1VqJrG2g3trjfwyOrt6ClbYY="/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -124,8 +124,8 @@
         <subsystem xmlns="urn:jboss:domain:bean-validation:1.0"/>
         <subsystem xmlns="urn:jboss:domain:core-management:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:5.0">
-              <datasources>
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
                     <driver>h2</driver>
                     <security>
@@ -133,14 +133,14 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                  <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS"  enabled="true" use-java-context="true">
-                    <connection-url>#{DB_JDBC_URL}#</connection-url>
-                    <driver>com.mssql</driver>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;</connection-url>
+                    <driver>mssql</driver>
                     <security>
-                        <user-name>#{DB_USERNAME}#</user-name>
-                        <password>#{DB_PASSWORD}#</password>
+                        <user-name>User_d_prbrhsso</user-name>
+                        <password>9Pu78MklZaW14d</password>
                     </security>
-                    
+
                     <pool>
                         <min-pool-size>5</min-pool-size>
                         <max-pool-size>50</max-pool-size>
@@ -164,14 +164,19 @@
                         <share-prepared-statements>false</share-prepared-statements>
                     </statement>
 
-                    
+
+
                 </datasource>
                 <drivers>
-                    <driver name="com.mssql" module="com.mssql">
-                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
-                    </driver>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="postgresql" module="org.postgresql">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                    <driver name="mssql" module="com.mssql">
+                        <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+                        <xa-datasource-class>com.microsoft.sqlserver.jdbc.SQLServerXADataSource</xa-datasource-class>
                     </driver>
                 </drivers>
             </datasources>
@@ -577,7 +582,7 @@
                 <provider name="file" enabled="true">
                     <properties>
                         <property name="file" value="/opt/eap/keystores/truststore.jks"/>
-                        <property name="password" value="SCUxs01PlQYXUrL9AcLriQBgl3mwGv3ViVv/ixYrFpY="/>
+                        <property name="password" value="t38KC80NL46DRlw1Ib8HGSa2N2NIPgkngXiW3UhZzPc="/>
                         <property name="hostname-verification-policy" value="WILDCARD"/>
                         <property name="disabled" value="false"/>
                     </properties>
