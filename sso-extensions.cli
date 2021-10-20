@@ -8,7 +8,7 @@ set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
 set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;"
 set DB_EAP_MODULE=com.mssql
 
-set FILE=/opt/eap/extensions/mssql-jdbc-7.4.1.jre8.jar
+set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
 
 module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,javax.resource.api
 /subsystem=datasources/jdbc-driver=$DB_DRIVER_NAME:add( \
