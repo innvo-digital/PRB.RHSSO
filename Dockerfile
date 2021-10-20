@@ -24,8 +24,6 @@ COPY /prb-login/ /opt/eap/themes/prb-login/
 RUN true
 COPY /standalone.xml /opt/eap/standalone/configuration/
 RUN true
-COPY /standalone-openshift.xml /opt/eap/standalone/configuration/
-RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
 RUN true
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
