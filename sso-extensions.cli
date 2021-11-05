@@ -1,11 +1,11 @@
 batch
 
 set DB_DRIVER_NAME=mssql
-set DB_USERNAME=User_d_prbrhsso
-set DB_PASSWORD=9Pu78MklZaW14d
+set DB_USERNAME=#{DB_USERNAME}#
+set DB_PASSWORD=#{DB_PASSWORD}#
 set DB_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
 set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
-set DB_JDBC_URL="jdbc:sqlserver://prbsqlserverdev.database.windows.net:1433;databaseName=prbrhsso-sqldb;"
+set DB_JDBC_URL="#{DB_JDBC_URL}#"
 set DB_EAP_MODULE=com.mssql
 
 set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
