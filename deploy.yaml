@@ -1,0 +1,173 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso
+  namespace: #{APP_NAMESPACE}#
+spec:
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      application: sso
+      deploymentConfig: sso
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      creationTimestamp: null
+      labels:
+        application: sso
+        deploymentConfig: sso
+        maistra.io/expose-route: "true"
+      name: sso
+    spec:
+      containers:
+      - env:
+        - name: SSO_HOSTNAME
+        - name: DB_MIN_POOL_SIZE
+        - name: DB_MAX_POOL_SIZE
+        - name: DB_TX_ISOLATION
+        - name: JGROUPS_PING_PROTOCOL
+          value: openshift.DNS_PING
+        - name: OPENSHIFT_DNS_PING_SERVICE_NAME
+          value: sso-ping
+        - name: OPENSHIFT_DNS_PING_SERVICE_PORT
+          value: "8888"
+        - name: X509_CA_BUNDLE
+          value: /var/run/configmaps/service-ca/service-ca.crt /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        - name: JGROUPS_CLUSTER_PASSWORD
+          value: b42T3nfyeysuQNFtrpqfnEYJipgTTA5p
+        - name: SSO_ADMIN_USERNAME
+          value: pbadmin
+        - name: SSO_ADMIN_PASSWORD
+          value: DafCEd74PIvuYsYFvMUlqgfp3IiHmEKB
+        - name: SSO_REALM
+        - name: SSO_SERVICE_USERNAME
+        - name: SSO_SERVICE_PASSWORD
+        image: ocpreg.azurecr.io/keycloak:#{Build.BuildNumber}#
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - /opt/eap/bin/livenessProbe.sh
+          #failureThreshold: 3
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: sso
+        ports:
+        - containerPort: 8778
+          name: jolokia
+          protocol: TCP
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 8443
+          name: https
+          protocol: TCP
+        - containerPort: 8888
+          name: ping
+          protocol: TCP
+        readinessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - -c
+            - /opt/eap/bin/readinessProbe.sh
+          #failureThreshold: 3
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            memory: #{MEMORY}#
+          requests:
+            cpu: #{CPU}#
+            memory: #{MEMORY}#
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/x509/https
+          name: sso-x509-https-volume
+          readOnly: true
+        - mountPath: /etc/x509/jgroups
+          name: sso-x509-jgroups-volume
+          readOnly: true
+        - mountPath: /var/run/configmaps/service-ca
+          name: service-ca
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 75
+      volumes:
+      - name: sso-x509-https-volume
+        secret:
+          defaultMode: 420
+          secretName: sso-x509-https-secret
+      - name: sso-x509-jgroups-volume
+        secret:
+          defaultMode: 420
+          secretName: sso-x509-jgroups-secret
+      - configMap:
+          defaultMode: 420
+          name: sso-service-ca
+        name: service-ca
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.alpha.openshift.io/serving-cert-secret-name: "sso-x509-https-secret"
+  name: sso
+  namespace: #{APP_NAMESPACE}#
+spec:
+  ports:
+  - port: 8443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    deploymentConfig: sso
+  sessionAffinity: None
+  type: ClusterIP
+
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: sso
+  namespace: #{APP_NAMESPACE}#
+spec:
+  host: sso-#{APP_NAMESPACE}#.apps.cluster.h.pbtech.net.br
+  tls:
+    termination: reencrypt
+  to:
+    name: sso
+
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sso
+  namespace: #{APP_NAMESPACE}#
+spec:
+  maxReplicas: #{MAX_HPA}#
+  minReplicas: #{MIN_HPA}#
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sso
+  targetCPUUtilizationPercentage: 75
