@@ -150,7 +150,7 @@ metadata:
   name: sso
   namespace: #{APP_NAMESPACE}#
 spec:
-  host: sso-#{APP_NAMESPACE}#.apps.cluster.h.pbtech.net.br
+  host: sso-#{APP_NAMESPACE}#.#{HOST_NAME}#
   tls:
     termination: reencrypt
   to:
