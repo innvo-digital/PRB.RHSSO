@@ -50,7 +50,7 @@ jobs:
       targetFiles: |
         **/*.yaml
         **/*.cli 
-        **/*.xml 
+        **/*.xml
   
   - task: DockerCompose@0
     displayName: 'Build Service'
@@ -89,7 +89,8 @@ jobs:
     inputs:
       targetFiles: |
         **/*.yaml
-        **/*.cli 
+        **/*.cli
+        **/*.xml
   
   - task: DockerCompose@0
     displayName: 'Build Service'
