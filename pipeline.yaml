@@ -8,6 +8,7 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
+      verbosity: 'detailed'
       targetFiles: |
         **/*.yaml
         **/*.cli 
