@@ -9,6 +9,8 @@ jobs:
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
       verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail
       targetFiles: |
         **/*.yaml
         **/*.cli 
