@@ -12,7 +12,7 @@ COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenti
 RUN ls -la
 RUN dos2unix sso-extensions.cli
 
-FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 AS final
+FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4-37 AS final
 WORKDIR /opt/eap/extensions/
 COPY --from=build /src .
 
