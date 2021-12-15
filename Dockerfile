@@ -16,11 +16,8 @@ FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 AS final
 WORKDIR /opt/eap/extensions/
 COPY --from=build /src .
 
-
 #para cada template colocar em uma pasta destino diferente
 COPY /exemplo/ /opt/eap/themes/exemplo/
-RUN true
-RUN chmod -R 777 /opt/eap
 RUN true
 COPY /prb-login/ /opt/eap/themes/prb-login/
 #RUN true
