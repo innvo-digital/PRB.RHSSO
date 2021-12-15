@@ -10,7 +10,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 COPY mssql-jdbc-9.2.1.jre11.jar .
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
 RUN ls -la
-RUN chmod -R 777 /opt/eap
 RUN dos2unix sso-extensions.cli
 
 FROM registry.redhat.io/rh-sso-7/sso74-openshift-rhel8:7.4 AS final
@@ -20,6 +19,8 @@ COPY --from=build /src .
 
 #para cada template colocar em uma pasta destino diferente
 COPY /exemplo/ /opt/eap/themes/exemplo/
+RUN true
+RUN chmod -R 777 /opt/eap
 RUN true
 COPY /prb-login/ /opt/eap/themes/prb-login/
 #RUN true
