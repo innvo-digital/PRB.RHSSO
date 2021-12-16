@@ -161,6 +161,9 @@ spec:
     targetPort: 8888
   selector:
     application: sso
+  clusterIP: None
+  clusterIPs:
+    - None
   sessionAffinity: None
   type: ClusterIP
 
