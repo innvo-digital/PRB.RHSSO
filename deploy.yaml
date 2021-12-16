@@ -135,10 +135,32 @@ metadata:
 spec:
   ports:
   - port: 8443
+    name: https
     protocol: TCP
     targetPort: 8443
   selector:
-    deploymentConfig: sso
+    application: sso
+  sessionAffinity: None
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    description: The JGroups ping port for clustering.
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: 'true'
+    service.alpha.openshift.io/serving-cert-secret-name: sso-x509-jgroups-secret
+  name: sso-ping
+  namespace: #{APP_NAMESPACE}#
+spec:
+  ports:
+  - port: 8888
+    name: ping
+    protocol: TCP
+    targetPort: 8888
+  selector:
+    application: sso
   sessionAffinity: None
   type: ClusterIP
 
