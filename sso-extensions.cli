@@ -7,6 +7,7 @@ set DB_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerDriver
 set DB_XA_DRIVER=com.microsoft.sqlserver.jdbc.SQLServerXADataSource
 set DB_JDBC_URL="#{DB_JDBC_URL}#"
 set DB_EAP_MODULE=com.mssql
+set PROXY_ADDRESS_FORWARDING=true
 
 set FILE=/opt/eap/extensions/mssql-jdbc-9.2.1.jre11.jar
 
