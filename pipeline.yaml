@@ -9,6 +9,8 @@ jobs:
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
       verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail
       targetFiles: |
         **/*.yaml
         **/*.cli 
@@ -48,6 +50,9 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
+      verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail
       targetFiles: |
         **/*.yaml
         **/*.cli 
@@ -88,6 +93,9 @@ jobs:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
+      verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail    
       targetFiles: |
         **/*.yaml
         **/*.cli
