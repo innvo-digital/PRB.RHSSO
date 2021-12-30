@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const passwordLabel = document.querySelector("#prb-label-senha");
   const password = document.querySelector("#password");
 
+  const passwordVisibilityToggle = document.querySelector(
+    "#password-visibility-toggle"
+  );
+
   const errorLogin = document.querySelector("#prb-error-login");
 
   const linkForgot = document.querySelector("#prb-link-forgot");
@@ -58,6 +62,18 @@ document.addEventListener("DOMContentLoaded", function () {
     password.value = paste;
 
     verificaLiberaBotaoSubmit();
+  });
+
+  passwordVisibilityToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const isActive = passwordVisibilityToggle.classList.toggle("is-active");
+
+    password.setAttribute("type", isActive ? "text" : "password");
+    passwordVisibilityToggle.setAttribute(
+      "title",
+      isActive ? "Esconder senha" : "Mostrar senha"
+    );
   });
 
   // FUNÇÕES DE CONTROLE

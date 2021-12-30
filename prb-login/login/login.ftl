@@ -47,18 +47,22 @@
                     >
                         Senha
                     </label>
-                    <input
-                        tabindex="2"
-                        type="password"
-                        class="prb-input"
-                        disabled
-                        placeholder="••••••"
-                        id="password"
-                        name="password"
-                        inputmode="numeric"
-                        autocomplete="off"
-                        maxlength="8"
-                    />
+                    <div class="prb-input-wrapper">
+                        <input
+                            tabindex="2"
+                            type="password"
+                            class="prb-input"
+                            disabled
+                            placeholder="••••••"
+                            id="password"
+                            name="password"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            maxlength="8"
+                        />
+                        <button tabindex="5" id="password-visibility-toggle" type="button" class="prb-input-password-visibility-button" title="Mostrar senha">
+                        </button>
+                    </div>
                 </div>
                 
                 <#if realm.resetPasswordAllowed>

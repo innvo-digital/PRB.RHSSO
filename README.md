@@ -1,16 +1,5 @@
-# Configuração para o login
+# Tema do Keycloak
 
-Dentro das configurações do Docker, va na opção `Docker Engine` e adicione o comando
+Para saber como instalar o Docker, configurá-lo e rodar o tema do Keycloak localmente, confira nossa documentação do Wiki no link abaixo:
 
-```
-"insecure-registries": [
-    "registry.redhat.io"
-]
-```
-
-# Comandos para executar a imagem após o login
-
-```
-docker build --tag rhsso .
-docker run --name teste --publish 8080:8080 --mount type=bind,source="/var/tmp/exemplo",target=/opt/eap/themes/exemplo -e SSO_ADMIN_USERNAME=admin -e SSO_ADMIN_PASSWORD=admin -i rhsso
-```
+http://vsm.homolog.jm:9999/tfs/Projetos/AppConsignado/_wiki/wikis/Squad-The-Mighty-Ducks.wiki/2313/Instalando-Docker-e-rodando-Keycloak-localmente
