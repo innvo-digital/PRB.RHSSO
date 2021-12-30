@@ -192,6 +192,36 @@ input.prb-input:focus {
   box-shadow: 0px 6px 8px rgba(51, 102, 255, 0.15);
 }
 
+.prb-input-wrapper {
+  position: relative;
+}
+
+.prb-input-password-visibility-button {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  margin-top: -14px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  cursor: pointer;
+  background: url(../img/iconVisibility.svg) transparent center center;
+}
+
+.prb-input-password-visibility-button.is-active {
+  background-image: url(../img/iconVisibilityOff.svg);
+}
+
+.prb-input-wrapper input[disabled] + .prb-input-password-visibility-button {
+  display: none;
+}
+
+.prb-input-wrapper
+  input:placeholder-shown
+  + .prb-input-password-visibility-button {
+  display: none;
+}
+
 input.prb-error,
 input.prb-error:focus {
   border-color: var(--error-base);
