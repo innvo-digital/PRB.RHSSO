@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
     <meta name="robots" content="noindex, nofollow">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -43,7 +44,7 @@
 
     <#if properties.styles?has_content>
         <#list properties.styles?split(' ') as style>
-            <link href="${url.resourcesPath}/${style}" rel="stylesheet" />
+            <link href="${url.resourcesPath}/${style}?v=${properties.assetsVersion}" rel="stylesheet" />
         </#list>
     </#if>
     <#if properties.scripts?has_content>
@@ -88,7 +89,7 @@
 </body>
     <#if properties.script?has_content>
         <#list properties.script?split(' ') as script>
-            <script src="${url.resourcesPath}/${script}" type="text/javascript"></script>
+            <script src="${url.resourcesPath}/${script}?v=${properties.assetsVersion}" type="text/javascript"></script>
         </#list>
     </#if>
 </html>
