@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Keycloak
+  description: Projeto de customizacao de temas de login do PB
+  tags:
+    - jboss
+  links:
+    - url: http://vsm.homolog.jm:9999/tfs/projetos/Keycloak/_git/Keycloak?version=GBmaster
+      title: Repositorio
+      icon: code
+      type: Repository
+spec:
+  type: service
+  system: frontend
+  lifecycle: Production
+  owner: squad-the-mighty-ducks
+  dependsOn:
+    - resource:rhsso
+  providesApis:
+    - PrbApp
