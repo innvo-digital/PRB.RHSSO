@@ -6,6 +6,18 @@ metadata:
   tags:
     - jboss
   links:
+    - url: https://sso-seguranca.apps.cluster.p.pbtech.net.br/auth/
+      title: Aplicacao em producao
+      icon: code
+      type: Repository
+    - url: https://sso-seguranca-hom.apps.cluster.h.pbtech.net.br/auth/
+      title: Aplicacao em homologacao
+      icon: code
+      type: Repository
+    - url: https://sso-seguranca-dev.apps.cluster.h.pbtech.net.br/auth/
+      title: Aplicacao em desenvolvimento
+      icon: code
+      type: Repository
     - url: http://vsm.homolog.jm:9999/tfs/projetos/Keycloak/_git/Keycloak?version=GBmaster
       title: Repositorio
       icon: code
