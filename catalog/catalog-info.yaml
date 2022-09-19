@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: Keycloak
-  description: Projeto de customizacao de temas de login do PB
+  description: Projeto Single-Sign On e de customizacao de temas de login do PB
   tags:
     - jboss
   links:
@@ -12,10 +12,11 @@ metadata:
       type: Repository
 spec:
   type: service
-  system: frontend
+  system: infra
   lifecycle: Production
-  owner: squad-the-mighty-ducks
+  owner: infraestrutura
   dependsOn:
     - resource:rhsso
+    - resource:sqlserver
   providesApis:
-    - PrbApp
+    - PrbAuth
