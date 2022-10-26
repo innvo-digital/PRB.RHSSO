@@ -1,3 +1,14 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ocpreg
+  namespace: #{APP_NAMESPACE}#
+data:
+  .dockerconfigjson: >-
+    eyJhdXRocyI6eyJvY3ByZWcuYXp1cmVjci5pbyI6eyJ1c2VybmFtZSI6Im9jcHJlZyIsInBhc3N3b3JkIjoiN3dtUXUxSTRmdEtKaDl3SnFBTDg9SmpiVWZNM0ZpTkciLCJhdXRoIjoiYjJOd2NtVm5PamQzYlZGMU1VazBablJMU21nNWQwcHhRVXc0UFVwcVlsVm1UVE5HYVU1SCJ9fX0=
+type: kubernetes.io/dockerconfigjson
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -113,6 +124,8 @@ spec:
           image: 'ocpreg.azurecr.io/keycloak:#{Build.BuildNumber}#'
       restartPolicy: Always
       terminationGracePeriodSeconds: 75
+      imagePullSecrets:
+        - name: ocpreg
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
