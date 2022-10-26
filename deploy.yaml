@@ -124,8 +124,8 @@ spec:
           image: 'ocpreg.azurecr.io/keycloak:#{Build.BuildNumber}#'
       restartPolicy: Always
       terminationGracePeriodSeconds: 75
-    imagePullSecrets:
-      - name: ocpreg
+      imagePullSecrets:
+        - name: ocpreg
       dnsPolicy: ClusterFirst
       securityContext: {}
       schedulerName: default-scheduler
