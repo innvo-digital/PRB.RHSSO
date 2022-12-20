@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: Keycloak
+  name: RHSSO
   description: Projeto Red Hat Single-Sign On e de customizacao de temas de login do PB. Utilizado para autenticação e autorização de clientes do Consignado e serviços de terceiro, alem de serviços internos
   tags:
     - rhsso74
