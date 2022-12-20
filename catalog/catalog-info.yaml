@@ -2,20 +2,21 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: Keycloak
-  description: Projeto Single-Sign On e de customizacao de temas de login do PB
+  description: Projeto Red Hat Single-Sign On e de customizacao de temas de login do PB
   tags:
-    - jboss
+    - rhsso74
+    - bfb
   links:
     - url: https://sso-seguranca.apps.cluster.p.pbtech.net.br/auth/
-      title: Aplicacao em producao
+      title: Aplicacao em Producao
       icon: code
       type: Repository
-    - url: https://sso-seguranca-hom.apps.cluster.h.pbtech.net.br/auth/
-      title: Aplicacao em homologacao
+    - url: https://sso-seguranca-hom.apps.cluster.ocp.h.pbtech.net.br/auth/
+      title: Aplicacao em Homologacao
       icon: code
       type: Repository
-    - url: https://sso-seguranca-dev.apps.cluster.h.pbtech.net.br/auth/
-      title: Aplicacao em desenvolvimento
+    - url: https://sso-seguranca-dev.apps.cluster.ocp.h.pbtech.net.br/auth/
+      title: Aplicacao em Desenvolvimento
       icon: code
       type: Repository
     - url: http://vsm.homolog.jm:9999/tfs/projetos/Keycloak/_git/Keycloak?version=GBmaster
@@ -26,7 +27,7 @@ spec:
   type: service
   system: infra
   lifecycle: Production
-  owner: infraestrutura
+  owner: coe-arquitetura-e-engenharia
   dependsOn:
     - resource:rhsso
     - resource:sqlserver
