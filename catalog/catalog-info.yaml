@@ -1,0 +1,34 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: RHSSO
+  description: Projeto Red Hat Single-Sign On e de customizacao de temas de login do PB. Utilizado para autenticação e autorização de clientes do Consignado e serviços de terceiro, alem de serviços internos
+  tags:
+    - rhsso74
+    - bfb
+  links:
+    - url: https://sso-seguranca.apps.cluster.p.pbtech.net.br/auth/
+      title: Aplicacao em Producao
+      icon: code
+      type: Repository
+    - url: https://sso-seguranca-hom.apps.cluster.ocp.h.pbtech.net.br/auth/
+      title: Aplicacao em Homologacao
+      icon: code
+      type: Repository
+    - url: https://sso-seguranca-dev.apps.cluster.ocp.h.pbtech.net.br/auth/
+      title: Aplicacao em Desenvolvimento
+      icon: code
+      type: Repository
+    - url: http://vsm.homolog.jm:9999/tfs/projetos/Keycloak/_git/Keycloak?version=GBmaster
+      title: Repositorio
+      icon: code
+      type: Repository
+spec:
+  type: service
+  system: sso
+  lifecycle: Production
+  owner: coe-arquitetura-e-engenharia
+  dependsOn:
+    - resource:sqlserver
+  providesApis:
+    - PrbAuth
