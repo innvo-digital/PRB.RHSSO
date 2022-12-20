@@ -25,7 +25,7 @@ metadata:
       type: Repository
 spec:
   type: service
-  system: infra
+  system: sso
   lifecycle: Production
   owner: coe-arquitetura-e-engenharia
   dependsOn:
