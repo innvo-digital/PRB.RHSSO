@@ -29,7 +29,6 @@ spec:
   lifecycle: Production
   owner: coe-arquitetura-e-engenharia
   dependsOn:
-    - resource:rhsso
     - resource:sqlserver
   providesApis:
     - PrbAuth
