@@ -4,7 +4,7 @@ metadata:
   name: RHSSO
   description: Projeto Red Hat Single-Sign On e de customizacao de temas de login do PB. Utilizado para autenticação e autorização de clientes do Consignado e serviços de terceiro, alem de serviços internos
   tags:
-    - rhsso74
+    - rhsso76
     - bfb
   links:
     - url: https://sso-seguranca.apps.cluster.p.pbtech.net.br/auth/
