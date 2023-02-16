@@ -1,3 +1,10 @@
+trigger:
+  branches:
+    include:
+    - master
+    - homolog
+    - development
+
 resources:
   repositories:
     - repository: templates
@@ -30,7 +37,7 @@ jobs:
     inputs:
       PathtoPublish: deploy.yaml
 
-  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/dev'))
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/development'))
 
 - job: 'Homolog'
   pool:
