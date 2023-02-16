@@ -1,0 +1,92 @@
+trigger:
+  branches:
+    include:
+    - master
+    - homolog
+    - development
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: DevOps/AzureDevOps-Pipelines
+      ref: master
+
+jobs:
+- job: 'Development'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "OpenShift - Development - Deploy - RHSSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail
+      targetFiles: |
+        **/*.yaml
+        **/*.cli 
+        **/*.xml 
+
+  - template: docker/task-docker-compose.yml@templates
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
+
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/development'))
+
+- job: 'Homolog'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "OpenShift - Homolog - Deploy - RHSSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail
+      targetFiles: |
+        **/*.yaml
+        **/*.cli 
+        **/*.xml
+  
+  - template: docker/task-docker-compose.yml@templates
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
+
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/homolog'))
+
+- job: 'Production'
+  pool:
+    name: Azure Servers
+  variables:
+    - group: "OpenShift - Production - Deploy - RHSSO"
+  steps:
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace tokens in **/*.yaml'
+    inputs:
+      verbosity: 'detailed'
+      actionOnNoFiles: fail
+      actionOnMissing: fail    
+      targetFiles: |
+        **/*.yaml
+        **/*.cli
+        **/*.xml
+  
+  - template: docker/task-docker-compose.yml@templates
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: deploy.yaml
+
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/master'))
