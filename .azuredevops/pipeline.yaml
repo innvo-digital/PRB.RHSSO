@@ -1,3 +1,10 @@
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: DevOps/AzureDevOps-Pipelines
+      ref: master
+
 jobs:
 - job: 'Development'
   pool:
@@ -16,23 +23,7 @@ jobs:
         **/*.cli 
         **/*.xml 
 
-  - task: DockerCompose@0
-    displayName: 'Build Service'
-    inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: RedHAT
-      action: 'Build services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
-  
-  - task: DockerCompose@0
-    displayName: 'Push Service'
-    inputs:
-      azureSubscription: 'AzurePRB_PROD'
-      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
-      action: 'Push services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
+  - template: docker/task-docker-compose.yml@templates
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
@@ -58,24 +49,7 @@ jobs:
         **/*.cli 
         **/*.xml
   
-  - task: DockerCompose@0
-    displayName: 'Build Service'
-    inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: RedHAT
-      action: 'Build services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
-      dockerComposeCommand: '--no-cache'
-  
-  - task: DockerCompose@0
-    displayName: 'Push Service'
-    inputs:
-      azureSubscription: 'AzurePRB_PROD'
-      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
-      action: 'Push services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
+  - template: docker/task-docker-compose.yml@templates
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
@@ -101,24 +75,7 @@ jobs:
         **/*.cli
         **/*.xml
   
-  - task: DockerCompose@0
-    displayName: 'Build Service'
-    inputs:
-      containerregistrytype: 'Container Registry'
-      dockerRegistryEndpoint: RedHAT
-      action: 'Build services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
-      dockerComposeCommand: '--no-cache'
-  
-  - task: DockerCompose@0
-    displayName: 'Push Service'
-    inputs:
-      azureSubscription: 'AzurePRB_PROD'
-      azureContainerRegistry: '{"loginServer":"ocpreg.azurecr.io", "id" : "/subscriptions/cc49fda0-bf9d-4180-a778-1b69960dfe68/resourceGroups/Azure_ContainerRegistry/providers/Microsoft.ContainerRegistry/registries/ocpreg"}'
-      action: 'Push services'
-      additionalImageTags: '$(Build.BuildNumber)'
-      includeLatestTag: true
+  - template: docker/task-docker-compose.yml@templates
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
