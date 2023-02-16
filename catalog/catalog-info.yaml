@@ -19,7 +19,7 @@ metadata:
       title: Aplicacao em Desenvolvimento
       icon: code
       type: Repository
-    - url: http://vsm.homolog.jm:9999/tfs/projetos/Keycloak/_git/Keycloak?version=GBmaster
+    - url: http://vsm.homolog.jm:9999/tfs/Projetos/App-Seguranca/_git/RHSSO
       title: Repositorio
       icon: code
       type: Repository
