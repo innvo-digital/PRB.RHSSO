@@ -7,7 +7,7 @@ metadata:
     - rhsso76
     - bfb
   links:
-    - url: https://sso-seguranca.apps.cluster.p.pbtech.net.br/auth/
+    - url: https://sso-seguranca.apps.cluster.ocp.p.pbtech.net.br/auth/
       title: Aplicacao em Producao
       icon: code
       type: Repository
@@ -23,6 +23,10 @@ metadata:
       title: Repositorio
       icon: code
       type: Repository
+   annotations:
+    dev.azure.com/project-repo: App-Seguranca/RHSSO
+    backstage.io/kubernetes-id: sso
+    backstage.io/linguist: https://vsm.paranabanco.b.br/tfs/Projetos/App-Seguranca/_git/RHSSO
 spec:
   type: service
   system: sso
