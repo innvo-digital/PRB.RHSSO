@@ -23,6 +23,10 @@ metadata:
       title: Repositorio
       icon: code
       type: Repository
+   annotations:
+    dev.azure.com/project-repo: App-Seguranca/RHSSO
+    backstage.io/kubernetes-id: sso
+    backstage.io/linguist: https://vsm.paranabanco.b.br/tfs/Projetos/App-Seguranca/_git/RHSSO
 spec:
   type: service
   system: sso
