@@ -26,6 +26,7 @@ spec:
         application: sso
         deploymentConfig: sso
         maistra.io/expose-route: 'true'
+        backstage.io/kubernetes-id: sso
     spec:
       volumes:
         - name: sso-x509-https-volume
@@ -143,6 +144,8 @@ kind: Service
 metadata:
   annotations:
     service.alpha.openshift.io/serving-cert-secret-name: "sso-x509-https-secret"
+  labels:
+    backstage.io/kubernetes-id: sso
   name: sso
   namespace: #{APP_NAMESPACE}#
 spec:
@@ -164,6 +167,8 @@ metadata:
     description: The JGroups ping port for clustering.
     service.alpha.kubernetes.io/tolerate-unready-endpoints: 'true'
     service.alpha.openshift.io/serving-cert-secret-name: sso-x509-jgroups-secret
+  labels:
+    backstage.io/kubernetes-id: sso
   name: sso-ping
   namespace: #{APP_NAMESPACE}#
 spec:
@@ -186,6 +191,8 @@ kind: Route
 metadata:
   name: sso
   namespace: #{APP_NAMESPACE}#
+  labels:
+    backstage.io/kubernetes-id: sso
 spec:
   host: sso-#{APP_NAMESPACE}#.#{HOST_NAME}#
   tls:
