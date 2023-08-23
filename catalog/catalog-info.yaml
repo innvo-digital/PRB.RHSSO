@@ -7,15 +7,15 @@ metadata:
     - rhsso76
     - bfb
   links:
-    - url: https://sso-seguranca.apps.cluster.ocp.p.pbtech.net.br/auth/
+    - url: https://sso-seguranca.apps.p.pbtech.net.br/auth/
       title: Aplicacao em Producao
       icon: code
       type: Repository
-    - url: https://sso-seguranca-hom.apps.cluster.ocp.h.pbtech.net.br/auth/
+    - url: https://sso-seguranca-hom.apps.h.pbtech.net.br/auth/
       title: Aplicacao em Homologacao
       icon: code
       type: Repository
-    - url: https://sso-seguranca-dev.apps.cluster.ocp.h.pbtech.net.br/auth/
+    - url: https://sso-seguranca-dev.apps.d.pbtech.net.br/auth/
       title: Aplicacao em Desenvolvimento
       icon: code
       type: Repository

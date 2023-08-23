@@ -17,7 +17,7 @@ jobs:
   pool:
     name: Azure Servers
   variables:
-    - group: "OpenShift - Development - Deploy - RHSSO"
+    - group: "DEV - RHSSO"
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
@@ -43,7 +43,7 @@ jobs:
   pool:
     name: Azure Servers
   variables:
-    - group: "OpenShift - Homolog - Deploy - RHSSO"
+    - group: "HOM - RHSSO"
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
@@ -69,7 +69,7 @@ jobs:
   pool:
     name: Azure Servers
   variables:
-    - group: "OpenShift - Production - Deploy - RHSSO"
+    - group: "PROD - RHSSO"
   steps:
   - task: qetza.replacetokens.replacetokens-task.replacetokens@3
     displayName: 'Replace tokens in **/*.yaml'
