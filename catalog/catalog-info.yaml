@@ -15,7 +15,7 @@ metadata:
       title: Aplicacao em Homologacao
       icon: code
       type: Repository
-    - url: https://sso-seguranca-dev.apps.d.pbtech.net.br/auth/
+    - url: https://sso-seguranca-dev.apps.h.pbtech.net.br/auth/
       title: Aplicacao em Desenvolvimento
       icon: code
       type: Repository
