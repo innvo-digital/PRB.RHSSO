@@ -30,7 +30,27 @@ jobs:
         **/*.cli 
         **/*.xml 
 
-  - template: docker/task-docker-compose.yml@templates
+  - task: DockerCompose@0
+    displayName: 'Build services $(Build.Repository.Name)'
+    inputs:
+      arguments: '--no-cache'
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHat
+      action: 'Build services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: DockerCompose@0
+    displayName: 'Push services $(Build.Repository.Name)'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD_Enterprise'
+      azureContainerRegistry: 'ocpreg.azurecr.io'
+      action: 'Push services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: PostBuildCleanup@3
+    displayName: 'Clean Agent Directories'
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
@@ -56,7 +76,27 @@ jobs:
         **/*.cli 
         **/*.xml
   
-  - template: docker/task-docker-compose.yml@templates
+  - task: DockerCompose@0
+    displayName: 'Build services $(Build.Repository.Name)'
+    inputs:
+      arguments: '--no-cache'
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHat
+      action: 'Build services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: DockerCompose@0
+    displayName: 'Push services $(Build.Repository.Name)'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD_Enterprise'
+      azureContainerRegistry: 'ocpreg.azurecr.io'
+      action: 'Push services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: PostBuildCleanup@3
+    displayName: 'Clean Agent Directories'
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
@@ -82,7 +122,27 @@ jobs:
         **/*.cli
         **/*.xml
   
-  - template: docker/task-docker-compose.yml@templates
+  - task: DockerCompose@0
+    displayName: 'Build services $(Build.Repository.Name)'
+    inputs:
+      arguments: '--no-cache'
+      containerregistrytype: 'Container Registry'
+      dockerRegistryEndpoint: RedHat
+      action: 'Build services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: DockerCompose@0
+    displayName: 'Push services $(Build.Repository.Name)'
+    inputs:
+      azureSubscription: 'AzurePRB_PROD_Enterprise'
+      azureContainerRegistry: 'ocpreg.azurecr.io'
+      action: 'Push services'
+      additionalImageTags: $(Build.BuildNumber)
+      dockerComposeFile: '**/docker-compose.yml'
+
+  - task: PostBuildCleanup@3
+    displayName: 'Clean Agent Directories'
   
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: drop'
