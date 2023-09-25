@@ -4,6 +4,10 @@ RUN yum install dos2unix -y
 WORKDIR /src
 COPY sso-extensions.cli .
 
+# support meterics and health check
+ENV KC_METRICS_ENABLED=true
+ENV KC_HEALTH_ENABLED=true
+
 ENV SET_CONTAINER_TIMEZONE=true CONTAINER_TIMEZONE=America/Sao_Paulo TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
