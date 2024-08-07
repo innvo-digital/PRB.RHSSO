@@ -49,7 +49,7 @@ jobs:
       additionalImageTags: $(Build.BuildNumber)
       dockerComposeFile: '**/docker-compose.yml'
 
-  - task: PostBuildCleanup@3
+  - task: PostBuildCleanup@4
     displayName: 'Clean Agent Directories'
   
   - task: PublishBuildArtifacts@1
@@ -95,7 +95,7 @@ jobs:
       additionalImageTags: $(Build.BuildNumber)
       dockerComposeFile: '**/docker-compose.yml'
 
-  - task: PostBuildCleanup@3
+  - task: PostBuildCleanup@4
     displayName: 'Clean Agent Directories'
   
   - task: PublishBuildArtifacts@1
