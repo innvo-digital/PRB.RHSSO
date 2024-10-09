@@ -1,0 +1,33 @@
+.heading-1,
+.heading-2,
+.heading-3,
+.heading-4,
+.heading-5,
+.heading-6 {
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.heading-1 {
+    font-size: 27px;
+}
+
+.heading-2 {
+    font-size: 25px;
+}
+
+.heading-3 {
+    font-size: 23px;
+}
+
+.{
+    font-size: 21px;
+}
+
+.heading-5 {
+    font-size: 19px;
+}
+
+.heading-6 {
+    font-size: 17px;
+}
