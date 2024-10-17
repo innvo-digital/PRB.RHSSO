@@ -13,6 +13,12 @@
                     <form asp-action="Login" method="post">
                         <input name="username" placeholder="Usuário" type="text" data-inputtext required>
                         <input name="password" placeholder="Senha" type="password" data-inputtext required>
+ <#if displayMessage && message?has_content>
+            <span class="prb-error"
+                id="prb-error-login">
+                Dados de acesso incorretos. Tente novamente
+            </span>
+        </#if>                        
                         <button type="submit" class="button">Login</button>
                     </form>
                     </main>

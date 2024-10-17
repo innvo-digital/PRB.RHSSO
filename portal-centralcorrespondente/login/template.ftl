@@ -15,21 +15,21 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/5.0.1/css/fixedColumns.dataTables.min.css" />
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/4.0.1/css/fixedHeader.dataTables.min.css" />
-<link rel="stylesheet" href="resources/css/bootstrap.min.css" crossorigin="anonymous" />
-<link rel="stylesheet" href="resources/css/bootstrap-icons.min.css" />
-<link rel="stylesheet" href="resources/css/reset.css" />
-<link rel="stylesheet" href="resources/css/header.css" />
-<link rel="stylesheet" href="resources/css/typograph.css" />
-<link rel="stylesheet" href="resources/css/main.css" />
-<link rel="stylesheet" href="resources/css/nav-menu.css" />
-<link rel="stylesheet" href="resources/css/footer.css" />
-<link rel="stylesheet" href="resources/css/form.css" />
-<link rel="stylesheet" href="resources/css/input.css" />
-<link rel="stylesheet" href="resources/css/button.css" />
-<link rel="stylesheet" href="resources/css/table.css" />
-<link rel="stylesheet" href="resources/css/alert.css" />
-<link rel="stylesheet" href="resources/css/home.css" />
-<link rel="stylesheet" href="resources/css/login.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/bootstrap.min.css" crossorigin="anonymous" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/bootstrap-icons.min.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/reset.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/header.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/typograph.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/main.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/nav-menu.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/footer.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/form.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/input.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/button.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/table.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/alert.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/home.css" />
+<link rel="stylesheet" href="${url.resourcesPath}/css/login.css" />
 <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script defer src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
@@ -37,13 +37,13 @@
 <script defer src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>
 <script defer src="https://cdn.datatables.net/fixedcolumns/5.0.1/js/dataTables.fixedColumns.min.js"></script>
 <script defer src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
-<script defer src="resources/js/inputtext.jquery.js"></script>
-<script defer src="resources/js/inputcheck.jquery.js"></script>
-<script defer src="resources/js/menu.js"></script>
-<script defer src="resources/js/select-report.js"></script>
-<script defer src="resources/js/dont-disturb.js"></script>
-<script defer src="resources/js/datatable.js"></script>
-<script defer src="js/form.js?1"></script>
+<script defer src="${url.resourcesPath}/js/inputtext.jquery.js"></script>
+<script defer src="${url.resourcesPath}/js/inputcheck.jquery.js"></script>
+<script defer src="${url.resourcesPath}/js/menu.js"></script>
+<script defer src="${url.resourcesPath}/js/select-report.js"></script>
+<script defer src="${url.resourcesPath}/js/dont-disturb.js"></script>
+<script defer src="${url.resourcesPath}/js/datatable.js"></script>
+<script defer src="${url.resourcesPath}/js/form.js?1"></script>
 </head>
 
 <body class="min-vh-100">
@@ -73,4 +73,11 @@
     </div>
 </body>
 </html>
+    <#if properties.script?has_content>
+        <#list properties.script?split(' ') as script>
+            <script src="${url.resourcesPath}/${script}?v=${properties.assetsVersion}" type="text/javascript"></script>
+        </#list>
+    </#if>
+</html>
+</#macro>
 
