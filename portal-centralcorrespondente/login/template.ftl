@@ -21,14 +21,11 @@
 <link rel="stylesheet" href="${url.resourcesPath}/css/header.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/typograph.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/main.css" />
-<link rel="stylesheet" href="${url.resourcesPath}/css/nav-menu.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/footer.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/form.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/input.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/button.css" />
-<link rel="stylesheet" href="${url.resourcesPath}/css/table.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/alert.css" />
-<link rel="stylesheet" href="${url.resourcesPath}/css/home.css" />
 <link rel="stylesheet" href="${url.resourcesPath}/css/login.css" />
 <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -39,10 +36,6 @@
 <script defer src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
 <script defer src="${url.resourcesPath}/js/inputtext.jquery.js"></script>
 <script defer src="${url.resourcesPath}/js/inputcheck.jquery.js"></script>
-<script defer src="${url.resourcesPath}/js/menu.js"></script>
-<script defer src="${url.resourcesPath}/js/select-report.js"></script>
-<script defer src="${url.resourcesPath}/js/dont-disturb.js"></script>
-<script defer src="${url.resourcesPath}/js/datatable.js"></script>
 <script defer src="${url.resourcesPath}/js/form.js?1"></script>
 </head>
 
