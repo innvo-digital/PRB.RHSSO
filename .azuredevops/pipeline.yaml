@@ -19,6 +19,11 @@ jobs:
   variables:
     - group: "DEV - RHSSO"
   steps:
+  - script: |
+      echo "##vso[task.setvariable variable=cleanProjectName]$(echo $(Build.Repository.Name) | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')"
+    displayName: 'Set clean project name variable'
+
+
   - task: qetza.replacetokens.replacetokens-task.replacetokens@5
     displayName: 'Replace tokens in **/*.yaml'
     inputs:
@@ -30,6 +35,8 @@ jobs:
         **/*.cli 
         **/*.xml 
 
+
+
   - task: DockerCompose@1
     displayName: 'Build services $(Build.Repository.Name)'
     inputs:
@@ -39,6 +46,7 @@ jobs:
       action: 'Build services'
       additionalImageTags: $(Build.BuildNumber)
       dockerComposeFile: '**/docker-compose.yml'
+      projectName: '$(cleanProjectName)'
 
   - task: DockerCompose@1
     displayName: 'Push services $(Build.Repository.Name)'
@@ -48,6 +56,7 @@ jobs:
       action: 'Push services'
       additionalImageTags: $(Build.BuildNumber)
       dockerComposeFile: '**/docker-compose.yml'
+      projectName: '$(cleanProjectName)'
 
   - task: PostBuildCleanup@4
     displayName: 'Clean Agent Directories'
