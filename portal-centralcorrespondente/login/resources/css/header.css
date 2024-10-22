@@ -1,0 +1,83 @@
+@keyframes header-logo {
+	0% {
+		fill: transparent;
+		stroke: #fff;
+		stroke-dashoffset: 842px;
+	}
+
+	80% {
+		fill: transparent;
+		stroke: #fff;
+		stroke-dashoffset: 0px;
+	}
+
+	100% {
+		fill: #fff;
+		stroke: transparent;
+		stroke-dashoffset: 0px;
+	}
+
+}
+
+.header {
+	box-shadow: 0 0 16px -8px #0003;
+	text-transform: uppercase;
+	padding: 8px;
+}
+
+.header__user {
+	border-right: 1px solid #333;
+	font-size: 12px;
+}
+
+.header__user-name {
+	font-size: 16px;
+
+}
+
+.header__link {
+	padding: 4px 16px;
+	font-weight: 700;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	transition: color 0.3s;
+	.bi {
+		font-size: 20px;
+	}
+	&:hover {
+		color: var(--color-primary-normal);
+	}
+}
+
+.header__nav {
+	background-color: var(--color-gray-thin);
+	border-radius: 6px;
+}
+
+.header__nav-item {
+	background-color: transparent;
+	padding: 12px;
+	border-style: none;
+	transition: background-color 0.3s;
+
+	svg {
+		width: 28px;
+		height: 28px;
+		vertical-align: sub;
+	}
+
+	path {
+		fill: var(--color-primary-normal);
+	}
+
+	&:hover {
+		background-color: #36f1;
+	}
+}
+
+@media (max-width: 920px) {
+	.header__user {
+		display: none;
+	}
+}
