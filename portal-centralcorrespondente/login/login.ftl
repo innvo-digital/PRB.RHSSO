@@ -10,7 +10,7 @@
                     </svg>
                     <h1 class="heading-2">Olá, vamos começar</h1>
                     <h1 class="heading-2 fw-bold">Preencha seu login e senha abaixo</h1>
-                    <form asp-action="Login" method="post">
+                    <form  action="${url.loginAction}" method="post">
                         <input name="username" placeholder="Usuário" type="text" data-inputtext required>
                         <input name="password" placeholder="Senha" type="password" data-inputtext required>
  <#if displayMessage && message?has_content>

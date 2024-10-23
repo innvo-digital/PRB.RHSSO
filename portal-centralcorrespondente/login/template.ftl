@@ -56,6 +56,12 @@
                         <button type="submit" class="button">Login</button>
                     </form>
                       
+                    <#if displayMessage && message?has_content>
+                        <#assign errorMessage = "Dados de acesso incorretos. Tente novamente." >
+                        <span class="prb-error" id="prb-error-login">
+                            ${errorMessage}
+                        </span>
+                    </#if> 
 
                     </main>
                 <div class="login-image__wrapper flex-fill" aria-hidden="true">
