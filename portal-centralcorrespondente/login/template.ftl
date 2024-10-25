@@ -35,7 +35,6 @@
 <script defer src="https://cdn.datatables.net/fixedcolumns/5.0.1/js/dataTables.fixedColumns.min.js"></script>
 <script defer src="https://cdn.datatables.net/fixedheader/4.0.1/js/dataTables.fixedHeader.min.js"></script>
 <script defer src="${url.resourcesPath}/js/inputtext.jquery.js"></script>
-<script defer src="${url.resourcesPath}/js/inputcheck.jquery.js"></script>
 <script defer src="${url.resourcesPath}/js/form.js?1"></script>
 </head>
 
@@ -50,20 +49,13 @@
                     </svg>
                     <h1 class="heading-2">Olá, vamos começar</h1>
                     <h1 class="heading-2 fw-bold">Preencha seu login e senha abaixo</h1>
-                    <form asp-action="Login" method="post">
-                        <input name="username" placeholder="Usuário" type="text" data-inputtext required>
-                        <input name="password" placeholder="Senha" type="password" data-inputtext required>
-                        <button type="submit" class="button">Login</button>
-                    </form>
-                      
-                    <#if displayMessage && message?has_content>
-                        <#assign errorMessage = "Dados de acesso incorretos. Tente novamente." >
-                        <span class="prb-error" id="prb-error-login">
-                            ${errorMessage}
-                        </span>
-                    </#if> 
-
-                    </main>
+                    <#nested "form">
+                    <#if displayMessage && message?has_content>  
+                    <div class="alert alert-${message.type}">
+                        <#if message.type = 'error'><div class="p-4 mt-2 mb-2 alert alert-danger rounded">${message.summary}</div></#if>
+                    </div>
+                    </#if>   
+                </main>
                 <div class="login-image__wrapper flex-fill" aria-hidden="true">
                     <div class="login-image__aside"></div>
                 </div>
