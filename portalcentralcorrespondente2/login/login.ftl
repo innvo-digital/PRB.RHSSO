@@ -8,7 +8,7 @@
                 </label>
 
                 <label id="password-label" for="password" class="${properties.kcLabelClass!}"><span>Senha</span>
-                    <input tabindex="2" id="password" class="prb-input" name="password" type="password" inputmode="numeric" autocomplete="off" maxlength="8"/>
+                    <input tabindex="2" id="password" class="prb-input" name="password" type="password" autocomplete="off"/>
                 </label>
 
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 
-            <input tabindex="4" class="disabled" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
+            <input tabindex="4" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
         </form>    
         
     <#elseif section = "info">
