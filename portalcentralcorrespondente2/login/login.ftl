@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 
-            <input tabindex="4" class="disabled" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
+            <input tabindex="4" name="login" id="prb-btn-login" type="submit" value="Continuar"/>
         </form>    
         
     <#elseif section = "info">
