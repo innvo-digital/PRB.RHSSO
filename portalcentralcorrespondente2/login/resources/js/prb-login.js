@@ -62,41 +62,6 @@ window.onload = function () {
   const form_content = document.getElementById('form_content');
   const prb_form = document.getElementById('prb-form');
 
-  password.addEventListener('focus', function (e) {
-    form_content.classList.add('mt-15');
-  });
-
-  forgout.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.cookie = "KEYCLOAK_FORGOT=true"; 
-    if(isMobile){
-      window.ReactNativeWebView.postMessage("KEYCLOAK_FORGOT=true")
-    }
-    return false
-  });
-
-  password.addEventListener('keyup', function () {
-    let pass = password.value.replace(/[^\d]+/g, '');
-    password.value = '';
-    password.value = pass;
-    if (pass.length >= 6) {
-      login_btn.classList.remove('disabled');
-    } else {
-      login_btn.classList.add('disabled');
-    }
-  });
-
-  password.addEventListener('paste', function (event) {
-    event.preventDefault();
-    let paste = (event.clipboardData || window.clipboardData).getData('text').replace(/[^\d]+/g, '');
-    password.value = '';
-    password.value = paste;
-    if (paste.length >= 6) {
-      login_btn.classList.remove('disabled');
-    } else {
-      login_btn.classList.add('disabled');
-    }
-  });
 
   prb_form.addEventListener('submit',function (e) {
     e.preventDefault(); 

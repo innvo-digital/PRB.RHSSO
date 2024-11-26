@@ -8,7 +8,7 @@
                 </label>
 
                 <label id="password-label" for="password" class="${properties.kcLabelClass!}"><span>Senha</span>
-                    <input tabindex="2" id="password" class="prb-input" name="password" type="password" inputmode="numeric" autocomplete="off" maxlength="8"/>
+                    <input tabindex="2" id="password" class="prb-input" name="password" type="password" autocomplete="off"/>
                 </label>
 
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
