@@ -4,9 +4,7 @@
         <form id="prb-form" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
             
                 <label id="username-label" for="username" class="${properties.kcLabelClass!}"><span>CPF</span>
-                    <input tabindex="1" id="username" name="username" value="${(login.username!'')}" type="hidden"/>
-                    <input tabindex="1" id="cpf" class="prb-input" value="" type="text" inputmode="numeric" autocomplete="off" maxlength="14" />
-                    <span class="has-error" id="error_cpf">Insira um CPF válido.</span>
+                    <input tabindex="1" id="username" name="username" value="${(login.username!'')}" type="text"/>                 
                 </label>
 
                 <label id="password-label" for="password" class="${properties.kcLabelClass!}"><span>Senha</span>
