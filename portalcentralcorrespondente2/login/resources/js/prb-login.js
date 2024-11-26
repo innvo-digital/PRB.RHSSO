@@ -65,39 +65,6 @@ window.onload = function () {
   forgout.style.display = 'none';
   error_cpf.style.display = 'none';
   password_label.style.display = 'none';
-  
-  my_cpf.addEventListener('keyup', function () {
-    let cpf = my_cpf.value.replace(/[^\d]+/g, '');
-    if (cpf.length <= 10) {
-      password_label.style.display = 'none';
-      error_cpf.style.display = 'none';
-      login_btn.classList.add('disabled');
-      forgout.style.display = 'none';
-      password.value = '';
-    } else if (isValidCPF(cpf) === false && cpf.length == 11) {
-      password_label.style.display = 'none';
-      error_cpf.style.display = 'flex';
-      username.classList.add('error');
-      login_btn.classList.add('disabled');
-      password.value = '';
-    } else if (isValidCPF(cpf) && cpf.length == 11) {
-      password_label.style.display = 'flex';
-      forgout.style.display = 'flex';
-      username.classList.remove('error');
-      error_cpf.style.display = 'none';
-      password.focus();
-      username.value = cpf;
-
-      if(isMobile){
-        window.ReactNativeWebView.postMessage("KEYCLOAK_USERNAME="+cpf);
-      }
-      
-    } else {
-      username.classList.remove('error');
-      password_label.style.display = 'flex';
-    }
-    my_cpf.value = maskCPF(cpf);
-  });
 
   password.addEventListener('focus', function (e) {
     form_content.classList.add('mt-15');
