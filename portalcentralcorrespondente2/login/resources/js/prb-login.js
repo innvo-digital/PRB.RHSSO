@@ -61,10 +61,6 @@ window.onload = function () {
   const error_cpf = document.getElementById('error_cpf');
   const form_content = document.getElementById('form_content');
   const prb_form = document.getElementById('prb-form');
-  
-  forgout.style.display = 'none';
-  error_cpf.style.display = 'none';
-  password_label.style.display = 'none';
 
   password.addEventListener('focus', function (e) {
     form_content.classList.add('mt-15');
