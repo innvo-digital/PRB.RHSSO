@@ -30,6 +30,7 @@
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script defer src="${url.resourcesPath}/js/inputtext.jquery.js"></script>
 <script defer src="${url.resourcesPath}/js/form.js?1"></script>
+
     <script src="${url.resourcesPath}/js/axios.min.js"></script>
 
     <#if properties.meta?has_content>
