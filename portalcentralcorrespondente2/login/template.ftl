@@ -68,17 +68,6 @@
                     </svg>
                     <h1 class="heading-2">Olá, vamos começar</h1>
                     <h1 class="heading-2 fw-bold">Preencha seu login e senha abaixo</h1>
-               
-                <#if displayMessage && message?has_content>
-                    <div class="alert alert-${message.type}">
-                        <#if message.type = 'success'><span class="${properties.kcFeedbackSuccessIcon!}"></span></#if>
-                        <#if message.type = 'warning'><span class="${properties.kcFeedbackWarningIcon!}"></span></#if>
-                        <#if message.type = 'error'><span class="${properties.kcFeedbackErrorIcon!}"></span></#if>
-                        <#if message.type = 'info'><span class="${properties.kcFeedbackInfoIcon!}"></span></#if>
-                        <span class="kc-feedback-text">${kcSanitize(message.summary)?no_esc}</span>
-                    </div>
-                </#if> 
-
                 <#if displayInfo>
                     <div id="kc-info" class="${properties.kcSignUpClass!}">
                         <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
@@ -87,11 +76,11 @@
                     </div>
                 </#if>  
                 <#nested "form">
-    <#if displayMessage && message?has_content>  
+                <#if displayMessage && message?has_content>  
                     <div class="alert alert-${message.type}">
                         <#if message.type = 'error'><div class="p-4 mt-2 mb-2 alert alert-danger rounded">${message.summary}</div></#if>
                     </div>
-                    </#if>   
+                </#if>
                 </main>
                 <div class="login-image__wrapper flex-fill" aria-hidden="true">
                     <div class="login-image__aside"></div>

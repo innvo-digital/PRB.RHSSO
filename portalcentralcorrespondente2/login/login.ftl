@@ -4,7 +4,7 @@
     <form id="prb-form" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
                 <input name="username" placeholder="Usuário" type="text" data-inputtext required>
                 <input name="password" placeholder="Senha" type="password" data-inputtext required>
-                <button name="login" id="prb-btn-login" class="button">Login</button>
+                <button name="login" class="button">Login</button>
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
                     <div class="${properties.kcFormOptionsWrapperClass!}">
                         <#if realm.resetPasswordAllowed>
