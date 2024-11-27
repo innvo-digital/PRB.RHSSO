@@ -1,0 +1,10 @@
+.alert {
+    .alert-text {
+        font-size: 0.9rem;
+    }
+    .bi {
+        line-height: 16px;
+        height: 16px;
+        font-size: 16px;
+    }
+}
