@@ -26,7 +26,7 @@ COPY /exemplo/ /opt/eap/themes/exemplo/
 RUN true
 COPY /prb-login/ /opt/eap/themes/prb-login/
 RUN true
-COPY /portal-centralcorrespondente/ /opt/eap/themes/portal-centralcorrespondente/
+COPY /portalcentralcorrespondente/ /opt/eap/themes/portalcentralcorrespondente/
 RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
 RUN true
