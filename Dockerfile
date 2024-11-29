@@ -28,6 +28,8 @@ COPY /prb-login/ /opt/eap/themes/prb-login/
 RUN true
 COPY /portalcentralcorrespondente/ /opt/eap/themes/portalcentralcorrespondente/
 RUN true
+COPY /portalcentralcorrespondente2/ /opt/eap/themes/portalcentralcorrespondente2/
+RUN true
 COPY /keycloak-sms-authenticator/themes/paranabanco/ /opt/eap/themes/paranabanco-sms-auth/
 RUN true
 COPY /keycloak-sms-authenticator/target/br.com.paranabanco.keycloak-sms-authenticator-4.5.0.Final-SNAPSHOT.jar .
