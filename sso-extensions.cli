@@ -18,8 +18,6 @@ module add --name=$DB_EAP_MODULE --resources=$FILE --dependencies=javax.api,java
   driver-class-name=$DB_DRIVER, \
   driver-xa-datasource-class-name=$DB_XA_DRIVER \
 )
-/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=DEBUG)
-/subsystem=logging/periodic-rotating-file-handler=FILE:add(level=DEBUG, autoflush=true, suffix=".yyyy-MM-dd", file={ "relative-to" => "jboss.server.log.dir", "path" => "server.log" })
 /subsystem=datasources/data-source=KeycloakDS:remove()
 /subsystem=datasources/data-source=KeycloakDS:add( \
   jndi-name=java:jboss/datasources/KeycloakDS,\
